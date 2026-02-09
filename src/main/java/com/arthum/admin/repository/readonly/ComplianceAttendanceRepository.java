@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface CorporateHrmsComplianceAttendanceRepository
+public interface ComplianceAttendanceRepository
         extends JpaRepository<CorporateHrmsComplianceAttendance, Integer> {
 
     Optional<CorporateHrmsComplianceAttendance> findByEmployeeIdAndMonth(

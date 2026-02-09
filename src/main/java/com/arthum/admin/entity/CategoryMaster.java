@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "corporate_hrms_category_master")
-class CategoryMaster {
+public class CategoryMaster {
 
     @Id
     @Column(name = "ID", length = 50)
