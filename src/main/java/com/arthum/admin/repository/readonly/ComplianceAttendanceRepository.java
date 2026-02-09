@@ -1,22 +1,22 @@
 package com.arthum.admin.repository.readonly;
 
-import com.arthum.admin.entity.CorporateHrmsComplianceAttendance;
+import com.arthum.admin.entity.ComplianceAttendance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
 public interface ComplianceAttendanceRepository
-        extends JpaRepository<CorporateHrmsComplianceAttendance, Integer> {
+        extends JpaRepository<ComplianceAttendance, Integer> {
 
-    Optional<CorporateHrmsComplianceAttendance> findByEmployeeIdAndMonth(
+    Optional<ComplianceAttendance> findByEmployeeIdAndMonth(
             String employeeId, String month
     );
 
-    List<CorporateHrmsComplianceAttendance> findByCompanyIdAndMonth(
+    List<ComplianceAttendance> findByCompanyIdAndMonth(
             String companyId, String month
     );
 
-    List<CorporateHrmsComplianceAttendance> findByFactoryIdAndMonth(
+    List<ComplianceAttendance> findByFactoryIdAndMonth(
             String factoryId, String month
     );
 }
