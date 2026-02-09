@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: admin
+  datasource:
+    read-only:
+      jdbc-url: jdbc:mysql://localhost:3306/arthum_hrms1?useSSL=false
+      username: readUser
+      password: pass@1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        pool-name: ReadOnlyHikariPool
+        minimum-idle: 5
+        maximum-pool-size: 20
+        idle-timeout: 300000
+        max-lifetime: 1800000
+        connection-timeout: 20000
+        leak-detection-threshold: 60000
+    transactional:
+      jdbc-url: jdbc:mysql://localhost:3306/arthum_hrms1?useSSL=false
+      username: hrms
+      password: pass@1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        pool-name: TransactionalHikariPool
+        minimum-idle: 10
+        maximum-pool-size: 30
+        idle-timeout: 300000
+        max-lifetime: 1800000
+        connection-timeout: 20000
+        leak-detection-threshold: 60000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+server:
+  port: 8082
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+cache:
+  factory:
+    ttl: 300
+
+logging:
+  console:
+    enabled: true  # Set to false to disable console logging
+  file:
+    enabled: true
+  level:
+    com.arthum.admin: INFO  # Change log level (TRACE, DEBUG, INFO, WARN, ERROR)
+
+jwt:
+  secret: mySecretKey12345678901234567890123456789012
+  expiration: 900000
+  cookie-expiration: 900
+
+auth:
+  username: admin
+  password: admin123
