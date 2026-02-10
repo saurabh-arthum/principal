@@ -21,19 +21,19 @@ public class FactoryWebController {
 
     @GetMapping
     public String listFactories(@RequestParam(defaultValue = "0") int page,
-                               @RequestParam(required = false) String factoryId,
-                               @RequestParam(required = false) String factoryName,
-                               @RequestParam(required = false) String address,
-                               Model model) {
+                                @RequestParam(required = false) String factoryId,
+                                @RequestParam(required = false) String factoryName,
+                                @RequestParam(required = false) String address,
+                                Model model) {
         Page<Factory> factories;
-        if ((factoryId != null && !factoryId.isEmpty()) || 
-            (factoryName != null && !factoryName.isEmpty()) || 
-            (address != null && !address.isEmpty())) {
+        if ((factoryId != null && !factoryId.isEmpty()) ||
+                (factoryName != null && !factoryName.isEmpty()) ||
+                (address != null && !address.isEmpty())) {
             factories = factoryService.searchFactories(factoryId, factoryName, address, page, 10);
         } else {
             factories = factoryService.getFactoriesPaginated(page, 10);
         }
-        
+
         model.addAttribute("factories", factories);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", factories.getTotalPages());
