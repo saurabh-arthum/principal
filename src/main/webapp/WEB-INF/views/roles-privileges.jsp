@@ -610,7 +610,7 @@
     </div>
 </div>
 
-<script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+<script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Sidebar Toggle Logic
     const sidebar = document.getElementById('sidebar');

@@ -81,6 +81,7 @@
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
+
                 <li>
                     <a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i> My Profile</a>
                 </li>
