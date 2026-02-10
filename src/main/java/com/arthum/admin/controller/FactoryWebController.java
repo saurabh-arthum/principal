@@ -80,12 +80,4 @@ public class FactoryWebController {
         factoryService.deleteFactory(id);
         return "redirect:/web/factories";
     }
-
-    @GetMapping("/index")
-    public String sample(Model model) {
-        model.addAttribute("includeJsp","dashboard.jsp");
-        return "master";
-    }
-
-
 }
