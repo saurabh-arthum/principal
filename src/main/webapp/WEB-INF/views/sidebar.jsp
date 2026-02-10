@@ -4,7 +4,7 @@
         <a href="#" class="sidebar-brand">
           <span class="brand-icon d-flex align-items-center justify-content-center">
             <!-- <i class="fa-solid fa-bolt" style="font-size: 14px; color: var(--sidebar-text-active)"></i> -->
-            <img src="images/logo.png" alt="" style="width: 30px; height: 30px" />
+            <img src="/images/logo.png" alt="" style="width: 30px; height: 30px" />
           </span>
             <span>Arthum</span>
         </a>

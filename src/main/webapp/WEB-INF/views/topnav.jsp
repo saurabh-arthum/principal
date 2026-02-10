@@ -69,7 +69,7 @@
         <div class="dropdown">
             <div class="user-avatar" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- Local dynamic avatar image -->
-                <img src="images/avatar.png" alt="User" />
+                <img src="/images/avatar.png" alt="User" />
                 <div class="online-status"></div>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
