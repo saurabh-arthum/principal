@@ -90,14 +90,9 @@
                     <button class="btn btn-primary btn-sm px-3 rounded-2 border-0" style="background-color: #345a6c">
                         <i class="fa-solid fa-circle-plus me-1"></i> Add Contractor
                     </button>
-                    <button type="button"
-                            class="btn btn-orange btn-sm px-3 rounded-2 text-white border-0"
-                            style="background-color: #e4520d"
-                            onclick="window.location.href='/web/factories/viewFactories'">
-
+                    <button   class="btn btn-orange btn-sm px-3 rounded-2 text-white border-0" style="background-color: #e4520d">
                         <i class="fa-solid fa-circle-plus me-1"></i> Add Factory
                     </button>
-
                 </div>
             </div>
 

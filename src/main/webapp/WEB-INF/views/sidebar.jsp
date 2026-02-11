@@ -58,7 +58,7 @@
             </li>
             <!-- Workforce / Factory Setup -->
             <li class="nav-item">
-                <a class="nav-link" href="factories.html" title="Workforce / Factory Setup">
+                <a class="nav-link" href="/web/factories/viewFactories" title="Workforce / Factory Setup">
                     <span class="brand-icon"><i class="fa-solid fa-industry"></i></span>
                     <span>Workforce / Factory Setup</span>
                 </a>
