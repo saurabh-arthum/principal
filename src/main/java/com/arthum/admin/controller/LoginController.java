@@ -32,13 +32,13 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login";
+        return "loginMaster";
     }
 
     @PostMapping("/logindata")
     public String logindata(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
         log.info("Web login attempt for user: {}", username);
-        
+
         if (validUsername.equals(username) && validPassword.equals(password)) {
             String token = jwtUtil.generateToken(username);
             Cookie cookie = new Cookie("token", token);
@@ -49,7 +49,7 @@ public class LoginController {
             log.info("Web login successful for user: {}", username);
             return "masterdashboard";
         }
-        
+
         log.warn("Web login failed for user: {}", username);
         return "redirect:/login?error";
     }
