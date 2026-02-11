@@ -89,9 +89,10 @@ public class FactoryWebController {
     }
 
 
-    @GetMapping("/viewFactories")
-    public String openFactoryPage(Model model) {
-        return "factories";
+    @GetMapping("/factoriesPage")
+    public String factoriesPage(Model model) {
+        return "factoriesPage";
     }
+
 
 }
