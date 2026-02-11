@@ -56,11 +56,14 @@
                     <span>Users</span>
                 </a>
             </li>
-            <!-- Workforce / Factory Setup -->
+
+
+
+            <!-- Factory Setup -->
             <li class="nav-item">
-                <a class="nav-link" href="/web/factories/viewFactories" title="Workforce / Factory Setup">
+                <a class="nav-link" href="/web/factories/factoriesPage" title="Factory Setup">
                     <span class="brand-icon"><i class="fa-solid fa-industry"></i></span>
-                    <span>Workforce / Factory Setup</span>
+                    <span>Factory Setup</span>
                 </a>
             </li>
 

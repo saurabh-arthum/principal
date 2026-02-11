@@ -484,6 +484,9 @@
             updatePagination();
         }
 
+
+
+
         function updatePagination() {
             const totalPages = Math.ceil(filteredData.length / itemsPerPage);
             const paginationSummary = document.getElementById('paginationSummary');
