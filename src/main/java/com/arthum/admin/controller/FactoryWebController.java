@@ -81,16 +81,17 @@ public class FactoryWebController {
         return "redirect:/web/factories";
     }
 
-    @GetMapping("/index")
-    public String sample(Model model) {
-        model.addAttribute("includeJsp","dashboard.jsp");
-        return "master";
-    }
+
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
+    public String dashboards(Model model) {
         return "masterdashboard";
     }
 
+
+    @GetMapping("/viewFactories")
+    public String openFactoryPage(Model model) {
+        return "factories";
+    }
 
 }

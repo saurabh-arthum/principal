@@ -89,7 +89,7 @@
                     <button class="btn btn-primary btn-sm px-3 rounded-2 border-0" style="background-color: #345a6c">
                         <i class="fa-solid fa-circle-plus me-1"></i> Add Contractor
                     </button>
-                    <button class="btn btn-orange btn-sm px-3 rounded-2 text-white border-0" style="background-color: #e4520d">
+                    <button  href="/web/factories/viewFactories" class="btn btn-orange btn-sm px-3 rounded-2 text-white border-0" style="background-color: #e4520d">
                         <i class="fa-solid fa-circle-plus me-1"></i> Add Factory
                     </button>
                 </div>
@@ -1075,7 +1075,7 @@
                                     <tr>
                                         <td>
                                             <div class="employee-info">
-                                                <img src="images/avatar.png" class="avatar-xs rounded-circle" />
+                                                <img src="/images/avatar.png" class="avatar-xs rounded-circle" />
                                                 <div>
                                                     <h6>Anthony Lewis</h6>
                                                     <small>9876543210</small>
@@ -1092,7 +1092,7 @@
                                     <tr>
                                         <td>
                                             <div class="employee-info">
-                                                <img src="images/avatar.png" class="avatar-xs rounded-circle" />
+                                                <img src="/images/avatar.png" class="avatar-xs rounded-circle" />
                                                 <div>
                                                     <h6>Brian Villalobos</h6>
                                                     <small>9876543210</small>
@@ -1114,7 +1114,7 @@
                                     <tr>
                                         <td>
                                             <div class="employee-info">
-                                                <img src="images/avatar.png" class="avatar-xs rounded-circle" />
+                                                <img src="/images/avatar.png" class="avatar-xs rounded-circle" />
                                                 <div>
                                                     <h6>Stephan Peralt</h6>
                                                     <small>9876543210</small>
@@ -1136,7 +1136,7 @@
                                     <tr>
                                         <td>
                                             <div class="employee-info">
-                                                <img src="images/avatar.png" class="avatar-xs rounded-circle" />
+                                                <img src="/images/avatar.png" class="avatar-xs rounded-circle" />
                                                 <div>
                                                     <h6>Doglas Martini</h6>
                                                     <small>9876543210</small>
@@ -1158,7 +1158,7 @@
                                     <tr>
                                         <td>
                                             <div class="employee-info">
-                                                <img src="images/avatar.png" class="avatar-xs rounded-circle" />
+                                                <img src="/images/avatar.png" class="avatar-xs rounded-circle" />
                                                 <div>
                                                     <h6>Anthony Lewis</h6>
                                                     <small>9876543210</small>
@@ -1188,7 +1188,7 @@
     </div>
 </div>
 
-<script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+<script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Sidebar Toggle Script -->
 <script>
@@ -1353,6 +1353,9 @@
         );
         attendanceChart.render();
     });
+
+
+
 </script>
 
 <!-- Module Content Manager -->

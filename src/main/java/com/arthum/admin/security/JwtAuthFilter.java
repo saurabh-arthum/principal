@@ -24,16 +24,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         
         String path = request.getRequestURI();
-        
-        if (path.equals("/login") || path.equals("/auth/login") || path.equals("/") || 
-            path.startsWith("/swagger-ui") || path.startsWith("/api-docs")) {
+
+        if (path.equals("/login") || path.equals("/auth/login") || path.equals("/") ||
+            path.startsWith("/swagger-ui") || path.startsWith("/api-docs") ||
+                path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("/images/") ||
+                path.startsWith("/bootstrap-5.3.8-dist")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         String token = null;
         String authHeader = request.getHeader("Authorization");
-        
+
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
         } else {
