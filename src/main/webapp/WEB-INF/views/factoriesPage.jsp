@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -21,7 +22,6 @@
 <div class="d-flex flex-column flex-lg-row">
 
     <!-- Sidebar -->
-
     <!-- Main Content Area -->
     <jsp:include page="sidebar.jsp"></jsp:include>
     <div class="flex-grow-1 bg-light">
@@ -243,7 +243,7 @@
                   <span class="input-group-text bg-light border-0">
                     <i class="fa-solid fa-location-dot text-muted"></i>
                   </span>
-                                <input type="text" class="form-control border-0 bg-light" placeholder="Enter address">
+                                <input type="text" id="address" name="address"  class="form-control border-0 bg-light" placeholder="Enter address">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -273,7 +273,7 @@
                   <span class="input-group-text bg-light border-0">
                     <i class="fa-solid fa-building text-muted"></i>
                   </span>
-                                <input type="text" class="form-control border-0 bg-light" placeholder="Enter district">
+                                <input type="text" id="district" name="district"   class="form-control border-0 bg-light" placeholder="Enter district">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -282,7 +282,7 @@
                   <span class="input-group-text bg-light border-0">
                     <i class="fa-solid fa-envelopes-bulk text-muted"></i>
                   </span>
-                                <input type="text" class="form-control border-0 bg-light" placeholder="Enter pincode">
+                                <input type="text"  id="pincode" name="pincode"  class="form-control border-0 bg-light" placeholder="Enter pincode">
                             </div>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                   <span class="input-group-text bg-light border-0">
                     <i class="fa-solid fa-phone text-muted"></i>
                   </span>
-                                <input type="text" class="form-control border-0 bg-light" placeholder="Enter phone">
+                                <input type="text" id="phone" name="phone"  class="form-control border-0 bg-light" placeholder="Enter phone">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -305,7 +305,7 @@
                   <span class="input-group-text bg-light border-0">
                     <i class="fa-solid fa-id-card text-muted"></i>
                   </span>
-                                <input type="text" class="form-control border-0 bg-light" placeholder="Enter ESIC">
+                                <input type="text" id="esicCode" name="esicCode"   class="form-control border-0 bg-light" placeholder="Enter ESIC">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -314,19 +314,26 @@
                   <span class="input-group-text bg-light border-0">
                     <i class="fa-solid fa-receipt text-muted"></i>
                   </span>
-                                <input type="text" class="form-control border-0 bg-light" placeholder="Enter GST">
+                                <input type="text" id="gst" name="gst" class="form-control border-0 bg-light" placeholder="Enter GST">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-
+            <div class="modal-footer border-top-0 d-flex justify-content-end gap-2" style="border-top: 1px solid #eee;">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="addFactoryForm" class="btn btn-primary-custom"
+                        style="padding-left: 20px; padding-right: 20px;">Save Factory</button>
+            </div>
             <!-- Footer -->
-            <%--footer--%>
-            <jsp:include page="footer.jsp"></jsp:include>
+
         </div>
+
     </div>
 </div>
+
+<%--footer--%>
+<jsp:include page="footer.jsp"></jsp:include>
 
 <!-- Bulk Upload Modal -->
 <div class="modal fade" id="bulkUploadModal" tabindex="-1">
@@ -425,15 +432,10 @@
             }
         }
 
-        if (sidebarToggle) {
-            sidebarToggle.addEventListener('click', toggleSidebar);
-        }
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
 
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', toggleSidebar);
-        }
-
-
+        // Rendering Functions
         function renderFactories() {
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
@@ -484,9 +486,6 @@
             updatePagination();
         }
 
-
-
-
         function updatePagination() {
             const totalPages = Math.ceil(filteredData.length / itemsPerPage);
             const paginationSummary = document.getElementById('paginationSummary');
@@ -496,38 +495,22 @@
             const end = Math.min(currentPage * itemsPerPage, filteredData.length);
             paginationSummary.innerText = `Showing ${start}-${end} of ${filteredData.length} factories`;
 
-            let controlsHtml = '';
-
-
-            const prevDisabled = currentPage === 1 ? 'disabled' : '';
-            controlsHtml += `
-        <a href="#" class="page-link-custom ${prevDisabled}" id="prevPage">
-            <i class="fa-solid fa-chevron-left"></i>
-        </a>
-    `;
-
+            let controlsHtml = `
+            <a href="#" class="page-link-custom ${currentPage == 1 ? 'disabled' : ''}" id="prevPage"><i class="fa-solid fa-chevron-left"></i></a>
+          `;
 
             for (let i = 1; i <= totalPages; i++) {
-                const activeClass = i === currentPage ? 'active' : '';
-                controlsHtml += `
-            <a href="#" class="page-link-custom ${activeClass}" data-page="${i}">
-                ${i}
-            </a>
-        `;
+                controlsHtml += `<a href="#" class="page-link-custom ${i == currentPage ? 'active' : ''}" data-page="${i}">${i}</a>`;
             }
 
-
-            const nextDisabled = (currentPage === totalPages || totalPages === 0) ? 'disabled' : '';
             controlsHtml += `
-        <a href="#" class="page-link-custom ${nextDisabled}" id="nextPage">
-            <i class="fa-solid fa-chevron-right"></i>
-        </a>
-    `;
+            <a href="#" class="page-link-custom ${currentPage == totalPages || totalPages == 0 ? 'disabled' : ''}" id="nextPage"><i class="fa-solid fa-chevron-right"></i></a>
+          `;
 
             paginationControls.innerHTML = controlsHtml;
 
-
-            paginationControls.querySelectorAll('[data-page]').forEach(link => {
+            // Re-attach listeners
+            paginationControls.querySelectorAll('.page-link-custom[data-page]').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     currentPage = parseInt(link.dataset.page);
@@ -704,6 +687,57 @@
         renderFactories();
     });
 </script>
+
+<script>
+    const addFactoryForm = document.getElementById('addFactoryForm');
+
+    if (addFactoryForm) {
+        addFactoryForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const factoryData = {
+                name: document.getElementById('factoryName').value,
+                attendanceType: document.getElementById('attendanceType').value,
+                address: document.getElementById('address').value,
+                state: document.getElementById('state').value,
+                district: document.getElementById('district').value,
+                pincode: document.getElementById('pincode').value,
+                phone: document.getElementById('phone').value,
+                esicCode: document.getElementById('esicCode').value,
+                gst: document.getElementById('gst').value
+            };
+
+            fetch('/api/factories', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(factoryData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to save factory");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Factory saved successfully!");
+
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addFactoryModal'));
+                    if (modal) modal.hide();
+
+                    addFactoryForm.reset();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Error saving factory");
+                });
+        });
+    }
+
+</script>
+
+
 </body>
 
 </html>
