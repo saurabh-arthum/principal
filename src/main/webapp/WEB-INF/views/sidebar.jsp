@@ -34,9 +34,9 @@
               </div>
             </li> -->
 
-            <!-- Users -->
+            <!-- Dashboard -->
             <li class="nav-item">
-                <a href="index.html" class="nav-link active" title="Users">
+                <a href="/web/factories/dashboard" class="nav-link active" title="Dashboard">
                     <span class="brand-icon"><i class="fa-solid fa-table-cells-large"></i></span>
                     <span>Dashboard</span>
                 </a>
@@ -44,7 +44,7 @@
 
             <!-- Roles & Rights -->
             <li class="nav-item">
-                <a href="roles-privileges.html" class="nav-link" title="Roles & Rights">
+                <a href="/web/rolePrivileges/role" class="nav-link" title="Roles & Rights">
                     <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
                     <span>Roles & Rights</span>
                 </a>
