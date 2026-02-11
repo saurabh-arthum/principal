@@ -51,7 +51,7 @@
             </li>
             <!-- Users -->
             <li class="nav-item">
-                <a href="user-management.html" class="nav-link" title="Users">
+                <a href="/web/management/user" class="nav-link" title="Users">
                     <span class="brand-icon"><i class="fa-solid fa-user-gear"></i></span>
                     <span>Users</span>
                 </a>
