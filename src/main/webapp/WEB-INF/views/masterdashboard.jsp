@@ -86,12 +86,18 @@
                     </div>
                 </div>
                 <div class="d-flex gap-2">
+
                     <button class="btn btn-primary btn-sm px-3 rounded-2 border-0" style="background-color: #345a6c">
                         <i class="fa-solid fa-circle-plus me-1"></i> Add Contractor
                     </button>
-                    <button  href="/web/factories/viewFactories" class="btn btn-orange btn-sm px-3 rounded-2 text-white border-0" style="background-color: #e4520d">
+                    <button type="button"
+                            class="btn btn-orange btn-sm px-3 rounded-2 text-white border-0"
+                            style="background-color: #e4520d"
+                            onclick="window.location.href='/web/factories/viewFactories'">
+
                         <i class="fa-solid fa-circle-plus me-1"></i> Add Factory
                     </button>
+
                 </div>
             </div>
 

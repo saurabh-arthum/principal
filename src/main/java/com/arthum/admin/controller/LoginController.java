@@ -32,7 +32,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "loginMaster";
+        return "login";
     }
 
     @PostMapping("/login")
