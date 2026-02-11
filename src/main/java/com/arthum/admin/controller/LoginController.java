@@ -47,7 +47,7 @@ public class LoginController {
             cookie.setMaxAge(cookieExpiration);
             response.addCookie(cookie);
             log.info("Web login successful for user: {}", username);
-            return "redirect:/web/factories/dashboard";
+            return "masterdashboard";
         }
         
         log.warn("Web login failed for user: {}", username);

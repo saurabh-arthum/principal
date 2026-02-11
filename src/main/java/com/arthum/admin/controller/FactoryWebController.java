@@ -84,7 +84,7 @@ public class FactoryWebController {
 
 
     @GetMapping("/dashboard")
-    public String dashboards(Model model) {
+    public String masterdashboard(Model model) {
         return "masterdashboard";
     }
 
