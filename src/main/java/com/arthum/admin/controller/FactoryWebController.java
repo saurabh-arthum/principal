@@ -81,8 +81,6 @@ public class FactoryWebController {
         return "redirect:/web/factories";
     }
 
-
-
     @GetMapping("/masterdashboard")
     public String masterdashboard(Model model) {
         return "masterdashboard";
