@@ -28,7 +28,7 @@
             <p>Anchor Management</p>
         </div>
 
-        <form class="login-form">
+        <form class="login-form" action="/logindata" method="post">
             <div class="mb-4">
                 <label for="email" class="form-label">Email address / Employee ID</label>
                 <div class="position-relative">
@@ -172,7 +172,7 @@
             this.style.pointerEvents = 'none';
 
             setTimeout(() => {
-                window.location.href = '/web/factories/dashboard';
+                window.location.href = '/web/factories/masterdashboard';
             }, 1000);
         });
     });

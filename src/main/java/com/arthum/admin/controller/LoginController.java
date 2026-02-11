@@ -35,8 +35,8 @@ public class LoginController {
         return "loginMaster";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
+    @PostMapping("/logindata")
+    public String logindata(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
         log.info("Web login attempt for user: {}", username);
         
         if (validUsername.equals(username) && validPassword.equals(password)) {
