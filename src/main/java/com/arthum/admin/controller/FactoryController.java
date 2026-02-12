@@ -15,63 +15,66 @@ import java.util.List;
 @RequestMapping("/api/factories")
 @Tag(name = "Factory", description = "Factory management APIs")
 public class FactoryController {
-    private static final Logger log = LoggerFactory.getLogger(FactoryController.class);
-    private final FactoryService factoryService;
+	private static final Logger log = LoggerFactory.getLogger(FactoryController.class);
+	private final FactoryService factoryService;
 
-    public FactoryController(FactoryService factoryService) {
-        this.factoryService = factoryService;
-    }
+	public FactoryController(FactoryService factoryService) {
+		this.factoryService = factoryService;
+	}
+	
+	
+	
 
-    @Operation(summary = "Get all factories (read-only datasource)")
-    @GetMapping("/readonly")
-    public List<Factory> getFactoriesReadOnly() {
-        log.info("REST: Get all factories (read-only)");
-        return factoryService.getAllFactoriesReadOnly();
-    }
+	@Operation(summary = "Get all factories (read-only datasource)")
+	@GetMapping("/readonly")
+	public List<Factory> getFactoriesReadOnly() {
+		log.info("REST: Get all factories (read-only)");
+		return factoryService.getAllFactoriesReadOnly();
+	}
 
-    @Operation(summary = "Get factories by state (read-only datasource)")
-    @GetMapping("/readonly/state/{state}")
-    public List<Factory> getFactoriesByState(@PathVariable String state) {
-        return factoryService.getFactoriesByState(state);
-    }
+	@Operation(summary = "Get factories by state (read-only datasource)")
+	@GetMapping("/readonly/state/{state}")
+	public List<Factory> getFactoriesByState(@PathVariable String state) {
+		return factoryService.getFactoriesByState(state);
+	}
 
-    @Operation(summary = "Get active factories (read-only datasource)")
-    @GetMapping("/readonly/active")
-    public List<Factory> getActiveFactories() {
-        return factoryService.getActiveFactories();
-    }
+	@Operation(summary = "Get active factories (read-only datasource)")
+	@GetMapping("/readonly/active")
+	public List<Factory> getActiveFactories() {
+		return factoryService.getActiveFactories();
+	}
 
-    @Operation(summary = "Get all factories (transactional datasource)")
-    @GetMapping
-    public List<Factory> getFactories() {
-        return factoryService.getAllFactories();
-    }
+	@Operation(summary = "Get all factories (transactional datasource)")
+	@GetMapping
+	public List<Factory> getFactories() {
+		return factoryService.getAllFactories();
+	}
 
-    @Operation(summary = "Create new factory")
-    @PostMapping
-    public Factory createFactory(@RequestBody Factory factory) {
-        log.info("REST: Create factory request");
-        return factoryService.createFactory(factory);
-    }
+	@Operation(summary = "Create new factory")
+	@PostMapping("/create")
+	public Factory createFactory(@RequestBody Factory factory) {
+		log.info("REST: Create factory request");
+		return factoryService.createFactory(factory);
+	}
 
-    @Operation(summary = "Update factory")
-    @PutMapping("/{id}")
-    public Factory updateFactory(@PathVariable String id, @RequestBody Factory factory) {
-        log.info("REST: Update factory request - ID: {}", id);
-        return factoryService.updateFactory(id, factory);
-    }
+	@Operation(summary = "Update factory")
+	@PutMapping("/{id}")
+	public Factory updateFactory(@PathVariable String id, @RequestBody Factory factory) {
+		log.info("REST: Update factory request - ID: {}", id);
+		return factoryService.updateFactory(id, factory);
+	}
 
-    @Operation(summary = "Update factory status")
-    @PutMapping("/{id}/status")
-    public ResponseEntity<Integer> updateFactoryStatus(@PathVariable String id, @RequestParam String status) {
-        int updated = factoryService.updateFactoryStatus(id, status);
-        return ResponseEntity.ok(updated);
-    }
+	@Operation(summary = "Update factory status")
+	@PutMapping("/{id}/status")
+	public ResponseEntity<Integer> updateFactoryStatus(@PathVariable String id, @RequestParam String status) {
+		int updated = factoryService.updateFactoryStatus(id, status);
+		return ResponseEntity.ok(updated);
+	}
 
-    @Operation(summary = "Delete inactive factory")
-    @DeleteMapping("/inactive/{id}")
-    public ResponseEntity<Integer> deleteInactiveFactory(@PathVariable String id) {
-        int deleted = factoryService.deleteInactiveFactory(id);
-        return ResponseEntity.ok(deleted);
-    }
+	@Operation(summary = "Delete inactive factory")
+	@DeleteMapping("/inactive/{id}")
+	public ResponseEntity<Integer> deleteInactiveFactory(@PathVariable String id) {
+		int deleted = factoryService.deleteInactiveFactory(id);
+		return ResponseEntity.ok(deleted);
+	}
 }
