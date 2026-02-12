@@ -806,7 +806,7 @@ function addFactory() {
     console.log("PPP");
     xhr.open("POST", "/api/factories/create", true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    console.log("PPP");
+    console.log("PPP..");
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
