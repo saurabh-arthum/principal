@@ -10,10 +10,11 @@ import java.util.List;
 
 @Repository
 public interface FactoryReadRepository extends JpaRepository<Factory, String> {
-    
-    @Query(value = "SELECT * FROM corporate_hrms_factory WHERE STATE = :state", nativeQuery = true)
-    List<Factory> findByStateNative(@Param("state") String state);
-    
-    @Query(value = "SELECT * FROM corporate_hrms_factory WHERE STATUS = 'ACTIVE' ORDER BY FACTORY_NAME", nativeQuery = true)
-    List<Factory> findActiveFactories();
+
+	@Query(value = "SELECT * FROM corporate_hrms_factory WHERE STATE = :state", nativeQuery = true)
+	List<Factory> findByStateNative(@Param("state") String state);
+
+	@Query(value = "SELECT * FROM corporate_hrms_factory WHERE STATUS = 'ACTIVE' AND PRINCIPAL_ID = ?1 ORDER BY FACTORY_NAME", nativeQuery = true)
+	List<Factory> findActiveFactories(String principalId);
+
 }

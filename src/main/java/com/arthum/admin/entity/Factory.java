@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "corporate_hrms_factory")
 public class Factory {
+	
 	@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FACTORY_ID")
 	private String factoryId;
 

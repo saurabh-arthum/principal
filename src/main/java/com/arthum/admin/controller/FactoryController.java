@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,11 +36,16 @@ public class FactoryController {
 		return factoryService.getFactoriesByState(state);
 	}
 
-	@Operation(summary = "Get active factories (read-only datasource)")
 	@GetMapping("/readonly/active")
-	public List<Factory> getActiveFactories() {
-		return factoryService.getActiveFactories();
+	public RestResponse getActiveFactories() {
+	    List<Factory> list = factoryService.getActiveFactories();
+	    RestResponse res = new RestResponse();
+	    res.setStatus(200);
+	    res.setMessage("Factories fetched successfully");
+	    res.setData(list);
+	    return res;
 	}
+
 
 	@Operation(summary = "Get all factories (transactional datasource)")
 	@GetMapping

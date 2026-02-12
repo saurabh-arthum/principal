@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,10 +44,10 @@ public class FactoryService {
         return factoryReadRepository.findByStateNative(state);
     }
 
-    public List<Factory> getActiveFactories() {
-        log.info("Fetching active factories");
-        return factoryReadRepository.findActiveFactories();
-    }
+        public List<Factory> getActiveFactories() {
+        	log.info("Fetching active factories");
+            return factoryReadRepository.findActiveFactories("b6f87ad5-db08-4337-9cb4-6b818f43ba45");
+        }
 
     @Cacheable(value = "factories", key = "#page + '-' + #size")
     public Page<Factory> getFactoriesPaginated(int page, int size) {
@@ -83,6 +85,10 @@ public class FactoryService {
     @Transactional
     public Factory createFactory(Factory factory) {
         log.info("Creating factory: {}", factory.getFactoryId());
+        factory.setPrincipalId("b6f87ad5-db08-4337-9cb4-6b818f43ba45");
+        factory.setCompanyId("b6f87ad5-db08-4337-9cb4-6b818f43ba67");
+        factory.setFactoryId(UUID.randomUUID().toString());
+        factory.setStatus("ACTIVE");
         factory.setRecordDate(LocalDateTime.now());
         Factory saved = factoryRepository.save(factory);
         log.info("Factory created successfully");

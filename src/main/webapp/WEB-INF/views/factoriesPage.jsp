@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body onload="loadFactoriesFromBackend();">
@@ -1248,25 +1247,32 @@ function loadFactoriesFromBackend() {
 
     xhr.open("GET", "/api/factories/readonly/active", true);
 
-    xhr.onload = function () {
+    xhr.onreadystatechange = function () {
 
-        if (xhr.status === 200) {
+        if (xhr.readyState === 4) {
 
-            factoriesData = JSON.parse(xhr.responseText);
-            filteredData = [...factoriesData];
-            currentPage = 1;
+            if (xhr.status === 200) {
 
-            renderFactories();
+                var data = JSON.parse(xhr.responseText);
+                console.log("Backend Response:", data);
 
-        } else {
-            alert("Failed to load factories. Status: " + xhr.status);
+                if (data.status === 200) {
+                    filteredData = data.data;
+                    renderFactories();
+                } else {
+                    alert("Failed to load factories");
+                }
+
+            } else {
+                console.error("Error:", xhr.status, xhr.responseText);
+                alert("Error calling backend");
+            }
         }
     };
 
     xhr.onerror = function () {
-        alert("Network error while fetching factories.");
+        alert("Network error occurred");
     };
-
     xhr.send();
 }
 
