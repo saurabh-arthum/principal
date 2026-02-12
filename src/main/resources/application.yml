@@ -37,8 +37,11 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
+
+            
+            
 server:
-  port: 8082
+  port: 8084
 
 springdoc:
   api-docs:
