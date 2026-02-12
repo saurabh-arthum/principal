@@ -11,7 +11,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.util.Objects;
 
 @Entity
+
 @Table(name = "corporate_hrms_sequence")
+//@IdClass(SequenceId.class)
 public class Sequence {
 
     @Id
