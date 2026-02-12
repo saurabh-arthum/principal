@@ -1,6 +1,7 @@
 package com.arthum.admin.entity;
 
-import jakarta.persistence.*;
+
+
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "corporate_hrms_company_branch")

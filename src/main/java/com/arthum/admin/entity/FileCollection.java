@@ -1,6 +1,6 @@
 package com.arthum.admin.entity;
 
-import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity

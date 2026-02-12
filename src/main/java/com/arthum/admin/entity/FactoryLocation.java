@@ -1,6 +1,6 @@
 package com.arthum.admin.entity;
 
-import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "corporate_hrms_factory_location")
