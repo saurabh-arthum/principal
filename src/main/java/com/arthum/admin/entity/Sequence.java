@@ -1,6 +1,5 @@
 package com.arthum.admin.entity;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 

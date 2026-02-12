@@ -1,7 +1,6 @@
 package com.arthum.admin.exception;
 
 import com.arthum.admin.dto.ErrorResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
