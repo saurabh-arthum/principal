@@ -793,17 +793,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       // Data Store
       const factoriesData = [
-        { id: 'FAC001', name: 'North Hub Manufacturing', address: '123 Industrial Ave', district: 'Cook County', state: 'Illinois', pincode: '60601', phone: '+1-312-555-0101', esicCode: 'ESIC001234', gst: '27AABCU9603R1ZM', attendanceType: 'Biometric' },
-        { id: 'FAC002', name: 'East Tech Solutions', address: '456 Tech Park Rd', district: 'Suffolk County', state: 'Massachusetts', pincode: '02101', phone: '+1-617-555-0102', esicCode: 'ESIC001235', gst: '27AABCU9603R1ZN', attendanceType: 'RFID Card' },
-        { id: 'FAC003', name: 'South Logistics Hub', address: '789 Commerce Blvd', district: 'Travis County', state: 'Texas', pincode: '73301', phone: '+1-512-555-0103', esicCode: 'ESIC001236', gst: '27AABCU9603R1ZO', attendanceType: 'Biometric' },
-        { id: 'FAC004', name: 'West Assembly Plant', address: '321 Bay Street', district: 'San Francisco County', state: 'California', pincode: '94102', phone: '+1-415-555-0104', esicCode: 'ESIC001237', gst: '27AABCU9603R1ZP', attendanceType: 'Face Recognition' },
-        { id: 'FAC005', name: 'Central Fiber Works', address: '654 Textile Lane', district: 'Cook County', state: 'Illinois', pincode: '60602', phone: '+1-312-555-0105', esicCode: 'ESIC001238', gst: '27AABCU9603R1ZQ', attendanceType: 'Manual' },
-        { id: 'FAC006', name: 'Pacific Port Industries', address: '987 Harbor Way', district: 'King County', state: 'Washington', pincode: '98101', phone: '+1-206-555-0106', esicCode: 'ESIC001239', gst: '27AABCU9603R1ZR', attendanceType: 'Biometric' },
-        { id: 'FAC007', name: 'Mountain Tech Center', address: '147 Alpine Dr', district: 'Denver County', state: 'Colorado', pincode: '80201', phone: '+1-303-555-0107', esicCode: 'ESIC001240', gst: '27AABCU9603R1ZS', attendanceType: 'RFID Card' },
-        { id: 'FAC008', name: 'Desert Solar Facility', address: '258 Solar Blvd', district: 'Maricopa County', state: 'Arizona', pincode: '85001', phone: '+1-602-555-0108', esicCode: 'ESIC001241', gst: '27AABCU9603R1ZT', attendanceType: 'Biometric' },
-        { id: 'FAC009', name: 'River Textiles Mill', address: '369 Riverside Dr', district: 'St. Louis County', state: 'Missouri', pincode: '63101', phone: '+1-314-555-0109', esicCode: 'ESIC001242', gst: '27AABCU9603R1ZU', attendanceType: 'Manual' },
-        { id: 'FAC010', name: 'Iron Works Factory', address: '741 Steel Ave', district: 'Allegheny County', state: 'Pennsylvania', pincode: '15201', phone: '+1-412-555-0110', esicCode: 'ESIC001243', gst: '27AABCU9603R1ZV', attendanceType: 'Biometric' },
-        { id: 'FAC011', name: 'Sky High Electronics', address: '852 Broadway', district: 'New York County', state: 'New York', pincode: '10001', phone: '+1-212-555-0111', esicCode: 'ESIC001244', gst: '27AABCU9603R1ZW', attendanceType: 'Face Recognition' },
+         { id: 'FAC011', name: 'Sky High Electronics', address: '852 Broadway', district: 'New York County', state: 'New York', pincode: '10001', phone: '+1-212-555-0111', esicCode: 'ESIC001244', gst: '27AABCU9603R1ZW', attendanceType: 'Face Recognition' },
         { id: 'FAC012', name: 'Gulf Marine Industries', address: '963 Port Rd', district: 'Harris County', state: 'Texas', pincode: '77001', phone: '+1-713-555-0112', esicCode: 'ESIC001245', gst: '27AABCU9603R1ZX', attendanceType: 'Biometric' }
       ];
 
@@ -844,7 +834,7 @@
             var row =
             	  '<tr class="factory-item">' +
             	    '<td>' +
-            	      '<div class="fw-bold">' + item.name + '</div>' +
+            	      '<div class="fw-bold">' + item.factoryName + '</div>' +
             	      '<div class="text-muted small">ID: ' + item.id + '</div>' +
             	    '</td>' +
 
@@ -965,7 +955,8 @@
           link.addEventListener('click', (e) => {
             e.preventDefault();
             currentPage = parseInt(link.dataset.page);
-            renderFactories();
+            //renderFactories();
+            loadFactoriesFromBackend();
           });
         });
 
@@ -974,7 +965,8 @@
           e.preventDefault();
           if (currentPage > 1) {
             currentPage--;
-            renderFactories();
+           // renderFactories();
+            loadFactoriesFromBackend();
           }
         });
 
@@ -983,7 +975,8 @@
           e.preventDefault();
           if (currentPage < totalPages) {
             currentPage++;
-            renderFactories();
+            //renderFactories();
+            loadFactoriesFromBackend();
           }
         });
       }
@@ -1006,7 +999,8 @@
         });
 
         currentPage = 1;
-        renderFactories();
+        //renderFactories();
+        loadFactoriesFromBackend();
       }
 
       // Event Listeners
@@ -1246,6 +1240,36 @@ function addFactory() {
 
     xhr.send(JSON.stringify(data));
 }
+
+
+function loadFactoriesFromBackend() {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "/api/factories/readonly/active", true);
+
+    xhr.onload = function () {
+
+        if (xhr.status === 200) {
+
+            factoriesData = JSON.parse(xhr.responseText);
+            filteredData = [...factoriesData];
+            currentPage = 1;
+
+            renderFactories();
+
+        } else {
+            alert("Failed to load factories. Status: " + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        alert("Network error while fetching factories.");
+    };
+
+    xhr.send();
+}
+
 </script>
 
   
