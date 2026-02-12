@@ -1,11 +1,13 @@
 package com.arthum.admin.controller;
 
 import com.arthum.admin.entity.Factory;
+import com.arthum.admin.helper.RestResponse;
 import com.arthum.admin.service.FactoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +23,6 @@ public class FactoryController {
 	public FactoryController(FactoryService factoryService) {
 		this.factoryService = factoryService;
 	}
-	
-	
-	
 
 	@Operation(summary = "Get all factories (read-only datasource)")
 	@GetMapping("/readonly")
@@ -50,12 +49,18 @@ public class FactoryController {
 		return factoryService.getAllFactories();
 	}
 
-	@Operation(summary = "Create new factory")
 	@PostMapping("/create")
-	public Factory createFactory(@RequestBody Factory factory) {
-		log.info("REST: Create factory request");
-		return factoryService.createFactory(factory);
+	public RestResponse createFactory(@RequestBody Factory factory) {
+	    System.out.println(factory);
+	    Factory fact = factoryService.createFactory(factory);
+	    RestResponse res = new RestResponse();
+	    res.setStatus(201);
+	    res.setMessage("Factory added successfully");
+	    res.setData(fact);
+
+	    return res;
 	}
+
 
 	@Operation(summary = "Update factory")
 	@PutMapping("/{id}")
