@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload="loadFactoriesFromBackend();">
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <div class="d-flex flex-column flex-lg-row">
