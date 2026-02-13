@@ -91,7 +91,7 @@ public class FactoryController {
 	//factories for searching by name
 	@Operation(summary = "Get all factories by name(read-only datasource)")
 	@GetMapping("/byfactoryName")
-	public RestResponse getFactoriesByName(@RequestBody Factory factory, @RequestParam ("factoryName") String factoryName) {
+	public RestResponse getFactoriesByName(@RequestParam ("factoryName") String factoryName) {
 		String principalId="b6f87ad5-db08-4337-9cb4-6b818f43ba45";
 		List<Factory> fact= factoryService.getFactoryByName(factoryName, principalId);
 		RestResponse res = new RestResponse();
@@ -117,6 +117,7 @@ public class FactoryController {
 	    return res;
 	}
 	
+	//getbyid by sneha
 	@PostMapping(value="/getbyId", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
 	public RestResponse getFactoriesById(@ModelAttribute Factory factory) {
