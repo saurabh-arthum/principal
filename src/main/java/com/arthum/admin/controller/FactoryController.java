@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -101,8 +102,8 @@ public class FactoryController {
 	}
 	
 	//saveAndUpdate
-	@PostMapping(value = "/saveUpdate")
-	public RestResponse saveFactory(@RequestBody Factory factory) {
+	@PostMapping(value = "/saveUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public RestResponse saveFactory(@ModelAttribute Factory factory) {
 	    RestResponse res = new RestResponse();
 	    try {
 	        Factory saved = factoryService.addOrUpdateFactory(factory);
@@ -113,6 +114,18 @@ public class FactoryController {
 	        res.setStatus(400);
 	        res.setMessage("Can't save factory: " + e.getMessage());
 	    }
+	    return res;
+	}
+	
+	@PostMapping(value="/getbyId", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseBody
+	public RestResponse getFactoriesById(@ModelAttribute Factory factory) {
+		String factoryId = factory.getFactoryId();
+	    Factory list = factoryService.getFactoriesById(factoryId);
+	    RestResponse res = new RestResponse();
+	    res.setStatus(200);
+	    res.setMessage("Factories by id fetched successfully");
+	    res.setData(list);
 	    return res;
 	}
 }

@@ -149,7 +149,7 @@ public class FactoryService {
 	        existing.setState(factory.getState());
 	        existing.setPin(factory.getPin());
 	        existing.setContactDetails(factory.getContactDetails());
-	        existing.setStatus(factory.getStatus());
+	        existing.setStatus("ACTIVE");
 	        existing.setUpdateDate(LocalDateTime.now());
 	        return factoryRepository.save(existing);
 	    }
@@ -158,6 +158,10 @@ public class FactoryService {
 	    factory.setStatus("ACTIVE");
 	    factory.setRecordDate(LocalDateTime.now());
 	    return factoryRepository.save(factory);
+	}
+
+	public Factory getFactoriesById(String factoryId) {
+		return factoryRepository.findById(factoryId).orElseThrow(() -> new RuntimeException("Factory not found with factoryId : " + factoryId));
 	}
 
 }

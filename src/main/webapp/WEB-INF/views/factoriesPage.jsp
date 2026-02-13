@@ -499,22 +499,9 @@
 								<div class="input-group">
 									<span class="input-group-text bg-light border-0"> <i
 										class="fa-solid fa-map text-muted"></i>
-									</span> <select class="form-select border-0 bg-light" id="editState">
-										<option value="">Select State</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-										<option value="Assam">Assam</option>
-										<option value="Bihar">Bihar</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-										<option value="Andhra Pradesh">Andhra Pradesh</option>
-
-
-									</select>
+									</span> <input type="text" id="editState" name="editState"
+										class="form-control border-0 bg-light"
+										placeholder="Enter state" readOnly> </select>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -633,19 +620,26 @@
         body: formdata
     })
     .then(res => res.json())
-    .then(data => {
+    .then(response => {
+    console.log(response, "full response");
+    
+    // Extract the inner data object
+    const factoryDetails = response.data; 
 
-        document.getElementById("editFactoryName").value = data.factoryName || "";
-        document.getElementById("editAttendanceType").value = data.attendanceType || "";
-        document.getElementById("editAddress").value = data.address || "";
-        document.getElementById("editState").value = data.state || "";
-        document.getElementById("editDistrict").value = data.district || "";
-        document.getElementById("editPincode").value = data.pin || "";
-        document.getElementById("editPhone").value = data.contactDetails || "";
-        document.getElementById("editEsic").value = data.esicCode || "";
-        document.getElementById("editGst").value = data.gst || "";
+    if (factoryDetails) {
+
+        document.getElementById("editFactoryName").value = factoryDetails.factoryName || "";
+        document.getElementById("editAttendanceType").value = factoryDetails.attendanceType || "";
+        document.getElementById("editAddress").value = factoryDetails.address || "";
+        document.getElementById("editState").value = factoryDetails.state || "";
+        document.getElementById("editDistrict").value = factoryDetails.district || "";
+        document.getElementById("editPincode").value = factoryDetails.pin || "";
+        document.getElementById("editPhone").value = factoryDetails.contactDetails || "";
+        document.getElementById("editEsic").value = factoryDetails.esicCode || "";
+        document.getElementById("editGst").value = factoryDetails.gst || "";
 
         document.getElementById("editFactoryForm").dataset.factoryId = id;
+    }
 
         const modal = new bootstrap.Modal(document.getElementById("editFactoryModal"));
         modal.show();
@@ -653,41 +647,38 @@
     .catch(() => alert("Failed to load factory details"));
 };
 
-     document.getElementById("editFactoryForm").addEventListener("submit", function(e) {
+document.getElementById("editFactoryForm").addEventListener("submit", function(e) {
 
-    	    e.preventDefault();
+    e.preventDefault();
 
-    	    const id = this.dataset.factoryId;
-    	    var formdata = new FormData();
-    	    formdata.append("factoryId", id);
+    const formData = new FormData();
 
-    	    const updatedData = {
-    	        factoryName: document.getElementById("editFactoryName").value,
-    	        attendanceType: document.getElementById("editAttendanceType").value,
-    	        address: document.getElementById("editAddress").value,
-    	        state: document.getElementById("editState").value,
-    	        district: document.getElementById("editDistrict").value,
-    	        pin: document.getElementById("editPincode").value,
-    	        contactDetails: document.getElementById("editPhone").value,
-    	        esicCode: document.getElementById("editEsic").value,
-    	        gst: document.getElementById("editGst").value
-    	    };
+    formData.append("factoryId", this.dataset.factoryId);
+    formData.append("factoryName", document.getElementById("editFactoryName").value);
+    formData.append("attendanceType", document.getElementById("editAttendanceType").value);
+    formData.append("address", document.getElementById("editAddress").value);
+    formData.append("state", document.getElementById("editState").value);
+    formData.append("district", document.getElementById("editDistrict").value);
+    formData.append("pin", document.getElementById("editPincode").value);
+    formData.append("contactDetails", document.getElementById("editPhone").value);
+    formData.append("esicCode", document.getElementById("editEsic").value);
+    formData.append("gst", document.getElementById("editGst").value);
 
-    	    fetch("/api/factories/saveUpdate" + id, {
-    	        method: "POST",
-    	        headers: {
-    	            "Content-Type": "application/json"
-    	        },
-    	        body: formdata,
-    	        body: JSON.stringify(updatedData)
-    	    })
-    	    .then(res => res.json())
-    	    .then(() => {
-    	        alert("Factory updated successfully");
-    	        location.reload();
-    	    })
-    	    .catch(() => alert("Update failed"));
-    	});
+    fetch("/api/factories/saveUpdate", {
+        method: "POST",
+        body: formData   // NO JSON, NO Content-Type header
+    })
+    .then(res => res.json())
+    .then(response => {
+        if (response.status === 201) {
+            alert("Factory updated successfully");
+            location.reload();
+        } else {
+            alert(response.message || "Update failed");
+        }
+    })
+    .catch(() => alert("Update failed"));
+});
    /*    function updatePagination() {
         const totalPages = Math.ceil(filteredData.length / itemsPerPage);
         const paginationSummary = document.getElementById('paginationSummary');

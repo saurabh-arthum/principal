@@ -53,7 +53,7 @@ public class FactoryWebController {
 		return "redirect:/web/factories";
 	}
 
-	@GetMapping("/edit")
+	@PostMapping("/edit")
 	public String showEditForm(@RequestParam("factoryId") String factoryId, Model model) {
 		log.info("Web: Edit factory form - ID: {}", factoryId);
 //		Factory factory = factoryService.getFactoryById(factoryId);
