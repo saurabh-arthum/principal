@@ -573,8 +573,7 @@
 						</div>
 					</form>
 				</div>
-				<jsp:include page="footer.jsp"></jsp:include>
-				<!-- Footer -->
+				
 				<div
 					class="modal-footer border-top-0 d-flex justify-content-end gap-2"
 					style="border-top: 1px solid #eee;">
@@ -586,8 +585,10 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
-
+<jsp:include page="footer.jsp"></jsp:include>
+				<!-- Footer -->
 	<script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 	<script>
 /* let factoriesData = [];
@@ -670,8 +671,8 @@
     	        gst: document.getElementById("editGst").value
     	    };
 
-    	    fetch("/api/factories/" + id, {
-    	        method: "PUT",
+    	    fetch("/api/factories/update" + id, {
+    	        method: "POST",
     	        headers: {
     	            "Content-Type": "application/json"
     	        },
