@@ -519,7 +519,7 @@
 									<span class="input-group-text bg-light border-0"> <i
 										class="fa-solid fa-envelopes-bulk text-muted"></i>
 									</span> <input type="text" class="form-control border-0 bg-light"
-										id="editPincode" placeholder="Enter pincode">
+										id="editPincode" placeholder="Enter pincode"  onkeyup="getPINDetailsUpdate()">
 								</div>
 							</div>
 						</div>
@@ -735,25 +735,24 @@ document.getElementById("editFactoryForm").addEventListener("submit", function(e
 
       function applyFilters() {
         const searchTerm = document.getElementById('inPageSearch').value.toLowerCase();
+        
         const statusFilter = document.getElementById('filterStatus').value;
+        
         const locationFilter = document.getElementById('filterLocation').value;
+        
 
-        filteredData = factoriesData.filter(item => {
-          const matchesSearch = item.name.toLowerCase().includes(searchTerm) ||
-            item.id.toLowerCase().includes(searchTerm) ||
-            item.address.toLowerCase().includes(searchTerm) ||
-            item.district.toLowerCase().includes(searchTerm) ||
-            item.state.toLowerCase().includes(searchTerm);
-          const matchesStatus = statusFilter === 'all' || item.attendanceType === statusFilter;
-          const matchesLocation = locationFilter === 'all' || item.state.toLowerCase() === locationFilter.toLowerCase();
+        if (searchTerm.length < 2) {
+            loadFactoriesFromBackend(); 
+            return;
+        }
 
-          return matchesSearch && matchesStatus && matchesLocation;
-        });
+        searchFactoriesFromBackend(searchTerm);
+    }
 
-        currentPage = 1;
+       // currentPage = 1;
        // renderFactories();
         //loadFactoriesFromBackend();
-      }
+      //}
 
       // Event Listeners
       document.getElementById('inPageSearch').addEventListener('input', applyFilters);
@@ -902,6 +901,7 @@ console.log("{{{}}}");
     }
 }
 
+
 function errorHandler(event){
     alert("Error occurred while calling API.");
 }
@@ -923,6 +923,41 @@ function completeHandler(event){
         document.getElementById("district").value = "";
         document.getElementById("state").value = "";
     }
+}
+
+function getPINDetailsUpdate(){
+    var pin = document.getElementById("editPincode").value;
+console.log("{{{}}}", pin);
+    if(pin.length === 6 && /^\d{6}$/.test(pin)) {
+
+        var ajax = new XMLHttpRequest();
+        ajax.addEventListener("load", completeHandlerUpdate, false);
+        ajax.addEventListener("error", errorHandlerUpdate, false);
+
+        ajax.open("GET", "https://api.postalpincode.in/pincode/" + pin);
+        ajax.send();
+    }
+}
+
+
+function completeHandlerUpdate(event){
+    var response = JSON.parse(event.target.responseText);
+
+    if (response[0].Status === "Success" && response[0].PostOffice.length > 0) {
+
+        var postOffice = response[0].PostOffice[0];
+
+        document.getElementById("editDistrict").value = postOffice.District;
+        document.getElementById("editState").value = postOffice.State;
+
+    } else {
+        alert("Invalid Pincode!");
+        document.getElementById("editDistrict").value = "";
+        document.getElementById("editState").value = "";
+    }
+}
+function errorHandlerUpdate(event){
+    alert("Error occurred while calling API.");
 }
 
 
@@ -1129,6 +1164,78 @@ function loadFactoriesFromBackend() {
     };
 
     xhr.send();
+}
+
+
+function searchFactoriesFromBackend(factoryName) {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/api/factories/byfactoryName", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onload = function () {
+
+        if (xhr.status === 200) {
+
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.status === 200 && response.data) {
+                renderFactoryTable(response.data);
+            } else {
+                alert("No factory found");
+            }
+
+        } else {
+            alert("Search failed. Status: " + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        alert("Network error during search.");
+    };
+
+    xhr.send(JSON.stringify({
+        factoryName: factoryName
+    }));
+}
+
+
+function renderFactoryTable(responseDetails) {
+
+    var listContainer = document.getElementById('listContainer');
+    listContainer.innerHTML = '';
+
+    if (!responseDetails || responseDetails.length === 0) {
+        listContainer.innerHTML =
+            '<tr><td colspan="10" class="text-center">No factories found</td></tr>';
+        return;
+    }
+
+    for (var i = 0; i < responseDetails.length; i++) {
+
+        var item = responseDetails[i];
+
+        var row =
+            '<tr>' +
+                '<td><div class="fw-bold">' + (item.factoryName || '') + '</div></td>' +
+                '<td>' + (item.address || '') + '</td>' +
+                '<td>' + (item.district || '') + '</td>' +
+                '<td>' + (item.state || '') + '</td>' +
+                '<td>' + (item.pin || '') + '</td>' +
+                '<td>' + (item.contactDetails || '') + '</td>' +
+                '<td>' + (item.esicCode || '') + '</td>' +
+                '<td>' + (item.gst || '') + '</td>' +
+                '<td>' + (item.attendanceType || '') + '</td>' +
+                '<td>' +
+                    '<button class="btn btn-sm btn-primary" onclick="editFactory(\'' + item.factoryId + '\')">' +
+                        'Edit' +
+                    '</button>' +
+                '</td>' +
+            '</tr>';
+
+        listContainer.insertAdjacentHTML('beforeend', row);
+    }
 }
 
 </script>
