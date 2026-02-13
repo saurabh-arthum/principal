@@ -590,16 +590,17 @@
 
 	<script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
 	<script>
+/* let factoriesData = [];
+	let filteredData = [];
+	let currentPage = 1;
+	const itemsPerPage = 6; */
     document.addEventListener('DOMContentLoaded', function () {
       // Data Store
-      const factoriesData = [
-         { id: 'FAC011', name: 'Sky High Electronics', address: '852 Broadway', district: 'New York County', state: 'New York', pincode: '10001', phone: '+1-212-555-0111', esicCode: 'ESIC001244', gst: '27AABCU9603R1ZW', attendanceType: 'Face Recognition' },
-        { id: 'FAC012', name: 'Gulf Marine Industries', address: '963 Port Rd', district: 'Harris County', state: 'Texas', pincode: '77001', phone: '+1-713-555-0112', esicCode: 'ESIC001245', gst: '27AABCU9603R1ZX', attendanceType: 'Biometric' }
-      ];
+ /*      const factoriesData = [];
 
       let filteredData = [...factoriesData];
       let currentPage = 1;
-      const itemsPerPage = 6;
+      const itemsPerPage = 6; */
 
       const sidebar = document.getElementById('sidebar');
       const sidebarToggle = document.getElementById('sidebarToggle');
@@ -619,115 +620,71 @@
       sidebarOverlay.addEventListener('click', toggleSidebar);
 
       // Rendering Functions
-      function renderFactories() {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const pageData = filteredData.slice(startIndex, endIndex);
-
-        const listContainer = document.getElementById('listContainer');
-        listContainer.innerHTML = '';
-
-        pageData.forEach(function(item) {
-
-            var mapQuery = encodeURIComponent(item.address + ', ' + item.district + ', ' + item.state);
-
-            var row =
-            	  '<tr class="factory-item">' +
-            	    '<td>' +
-            	      '<div class="fw-bold">' + item.factoryName + '</div>' +
-            	      '<div class="text-muted small">ID: ' + item.id + '</div>' +
-            	    '</td>' +
-
-            	    '<td>' +
-            	      '<div class="d-flex align-items-center gap-2">' +
-            	        '<span>' + item.address + '</span>' +
-            	        '<a href="https://www.google.com/maps/search/?api=1&query=' +
-            	          encodeURIComponent(item.address + ', ' + item.district + ', ' + item.state) +
-            	          '" target="_blank" class="btn btn-sm" ' +
-            	          'style="padding: 2px 8px; font-size: 10px; background: rgba(228, 82, 13, 0.1); color: #E4520D; border: none; border-radius: 6px;" ' +
-            	          'title="View on Map">' +
-            	          '<i class="fa-solid fa-map-marker-alt"></i> Map' +
-            	        '</a>' +
-            	      '</div>' +
-            	    '</td>' +
-
-            	    '<td>' + item.district + '</td>' +
-            	    '<td>' + item.state + '</td>' +
-            	    '<td>' + item.pincode + '</td>' +
-
-            	    '<td>' +
-            	      '<a href="tel:' + item.phone + '" class="text-decoration-none">' +
-            	        item.phone +
-            	      '</a>' +
-            	    '</td>' +
-
-            	    '<td>' + item.esicCode + '</td>' +
-            	    '<td>' + item.gst + '</td>' +
-
-            	    '<td>' +
-            	      '<span class="badge" style="background: rgba(228, 82, 13, 0.1); color: #E4520D; font-weight: 600;">' +
-            	        item.attendanceType +
-            	      '</span>' +
-            	    '</td>' +
-
-            	    '<td>' +
-            	      '<div class="dropdown">' +
-            	        '<button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">' +
-            	          '<i class="fa-solid fa-ellipsis-vertical"></i>' +
-            	        '</button>' +
-
-            	        '<ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">' +
-
-            	          '<li>' +
-            	            '<a class="dropdown-item py-2" href="#" onclick="editFactory(\'' + item.id + '\')">' +
-            	              '<i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Edit Factory' +
-            	            '</a>' +
-            	          '</li>' +
-
-            	          '<li>' +
-            	            '<a class="dropdown-item py-2" href="contractor.html?factory=' + item.id + '">' +
-            	              '<i class="fa-solid fa-handshake me-2 text-success"></i> Check Contractors' +
-            	            '</a>' +
-            	          '</li>' +
-
-            	          '<li>' +
-            	            '<a class="dropdown-item py-2" href="employees.html?factory=' + item.id + '">' +
-            	              '<i class="fa-solid fa-users me-2 text-info"></i> Check Employees' +
-            	            '</a>' +
-            	          '</li>' +
-
-            	        '</ul>' +
-            	      '</div>' +
-            	    '</td>' +
-
-            	  '</tr>';
-
-            	listContainer.insertAdjacentHTML('beforeend', row);
-        })
-              
-        updatePagination();
-      }
 
 
-      window.editFactory = function (id) {
-        const item = factoriesData.find(f => f.id === id);
-        if (item) {
-          document.getElementById('editFactoryName').value = item.name;
-          document.getElementById('editAttendanceType').value = item.attendanceType;
-          document.getElementById('editAddress').value = item.address;
-          document.getElementById('editState').value = item.state;
-          document.getElementById('editDistrict').value = item.district;
-          document.getElementById('editPincode').value = item.pincode;
-          document.getElementById('editPhone').value = item.phone;
-          document.getElementById('editEsic').value = item.esicCode;
-          document.getElementById('editGst').value = item.gst;
-          
-          const editModal = new bootstrap.Modal(document.getElementById('editFactoryModal'));
-          editModal.show();
-        }
-      };
+  window.editFactory = function(id) {
 
-      function updatePagination() {
+    var formdata = new FormData();
+    formdata.append("factoryId", id);
+
+    fetch("/api/factories/edit", {
+        method: "POST",
+        body: formdata
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById("editFactoryName").value = data.factoryName || "";
+        document.getElementById("editAttendanceType").value = data.attendanceType || "";
+        document.getElementById("editAddress").value = data.address || "";
+        document.getElementById("editState").value = data.state || "";
+        document.getElementById("editDistrict").value = data.district || "";
+        document.getElementById("editPincode").value = data.pin || "";
+        document.getElementById("editPhone").value = data.contactDetails || "";
+        document.getElementById("editEsic").value = data.esicCode || "";
+        document.getElementById("editGst").value = data.gst || "";
+
+        document.getElementById("editFactoryForm").dataset.factoryId = id;
+
+        const modal = new bootstrap.Modal(document.getElementById("editFactoryModal"));
+        modal.show();
+    })
+    .catch(() => alert("Failed to load factory details"));
+};
+
+     document.getElementById("editFactoryForm").addEventListener("submit", function(e) {
+
+    	    e.preventDefault();
+
+    	    const id = this.dataset.factoryId;
+
+    	    const updatedData = {
+    	        factoryName: document.getElementById("editFactoryName").value,
+    	        attendanceType: document.getElementById("editAttendanceType").value,
+    	        address: document.getElementById("editAddress").value,
+    	        state: document.getElementById("editState").value,
+    	        district: document.getElementById("editDistrict").value,
+    	        pin: document.getElementById("editPincode").value,
+    	        contactDetails: document.getElementById("editPhone").value,
+    	        esicCode: document.getElementById("editEsic").value,
+    	        gst: document.getElementById("editGst").value
+    	    };
+
+    	    fetch("/api/factories/" + id, {
+    	        method: "PUT",
+    	        headers: {
+    	            "Content-Type": "application/json"
+    	        },
+    	        body: JSON.stringify(updatedData)
+    	    })
+    	    .then(res => res.json())
+    	    .then(() => {
+    	        alert("Factory updated successfully");
+    	        location.reload();
+    	    })
+    	    .catch(() => alert("Update failed"));
+    	});
+   /*    function updatePagination() {
         const totalPages = Math.ceil(filteredData.length / itemsPerPage);
         const paginationSummary = document.getElementById('paginationSummary');
         const paginationControls = document.getElementById('paginationControls');
@@ -748,14 +705,14 @@
             <a href="#" class="page-link-custom ${currentPage == totalPages || totalPages == 0 ? 'disabled' : ''}" id="nextPage"><i class="fa-solid fa-chevron-right"></i></a>
           `;
 
-        paginationControls.innerHTML = controlsHtml;
+        paginationControls.innerHTML = controlsHtml; */
 
         // Re-attach listeners
-        paginationControls.querySelectorAll('.page-link-custom[data-page]').forEach(link => {
+       /*  paginationControls.querySelectorAll('.page-link-custom[data-page]').forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
             currentPage = parseInt(link.dataset.page);
-            //renderFactories();
+         renderFactories();
             loadFactoriesFromBackend();
           });
         });
@@ -765,7 +722,7 @@
           e.preventDefault();
           if (currentPage > 1) {
             currentPage--;
-           // renderFactories();
+           renderFactories();
             loadFactoriesFromBackend();
           }
         });
@@ -775,11 +732,11 @@
           e.preventDefault();
           if (currentPage < totalPages) {
             currentPage++;
-            //renderFactories();
+            renderFactories();
             loadFactoriesFromBackend();
           }
         });
-      }
+      } */
 
       function applyFilters() {
         const searchTerm = document.getElementById('inPageSearch').value.toLowerCase();
@@ -799,8 +756,8 @@
         });
 
         currentPage = 1;
-        //renderFactories();
-        loadFactoriesFromBackend();
+       // renderFactories();
+        //loadFactoriesFromBackend();
       }
 
       // Event Listeners
@@ -929,7 +886,7 @@
       }
 
       // Initialize Rendering
-      renderFactories();
+      //renderFactories();
     });
   </script>
 
@@ -1031,8 +988,8 @@ function addFactory() {
         address: address,
         gst: gst,
         district: district,
-        pincode: pincode,
-        phone: phone,
+        pin: pincode,
+        contactDetails: phone,
         esicCode: esiccode,
         state: state,
         factoryName: factoryName
@@ -1052,11 +1009,120 @@ function loadFactoriesFromBackend() {
 
         if (xhr.status === 200) {
 
-            factoriesData = JSON.parse(xhr.responseText);
-            filteredData = [...factoriesData];
-            currentPage = 1;
+            var response = JSON.parse(xhr.responseText);
 
-            renderFactories();
+            if (response.status === 200 && response.data) {
+
+            	let responseDetails=response.data
+                // map backend fields to UI expected fields
+               /*  factoriesData = response.data.map(function(item) {
+                    return {
+                        id: item.factoryId,
+                        name: item.factoryName,
+                        address: item.address,
+                        district: item.district,
+                        state: item.state,
+                        pincode: item.pin || "-",
+                        phone: item.contactDetails || "-",
+                        esicCode: item.esicCode,
+                        gst: item.gst,
+                        attendanceType: item.attendanceType
+                    };
+                });
+
+                filteredData = [factoriesData];
+                currentPage = 1; */
+   		/* 	function renderFactories() {
+ */
+                	/*     const startIndex = (currentPage - 1) * itemsPerPage;
+                	    const endIndex = startIndex + itemsPerPage; */
+                	   // const pageData = filteredData.slice(startIndex, endIndex);
+
+                	    const listContainer = document.getElementById('listContainer');
+                	    listContainer.innerHTML = '';
+
+                	    responseDetails.forEach(function(item) {
+
+                	        var row =
+                	        	  '<tr class="factory-item">' +
+                          	    '<td>' +
+                          	      '<div class="fw-bold">' + item.factoryName + '</div>' +
+                          	    '</td>' +
+
+                          	    '<td>' +
+                          	      '<div class="d-flex align-items-center gap-2">' +
+                          	        '<span>' + item.address + '</span>' +
+                          	        '<a href="https://www.google.com/maps/search/?api=1&query=' +
+                          	          encodeURIComponent(item.address + ', ' + item.district + ', ' + item.state) +
+                          	          '" target="_blank" class="btn btn-sm" ' +
+                          	          'style="padding: 2px 8px; font-size: 10px; background: rgba(228, 82, 13, 0.1); color: #E4520D; border: none; border-radius: 6px;" ' +
+                          	          'title="View on Map">' +
+                          	          '<i class="fa-solid fa-map-marker-alt"></i> Map' +
+                          	        '</a>' +
+                          	      '</div>' +
+                          	    '</td>' +
+
+                          	    '<td>' + item.district + '</td>' +
+                          	    '<td>' + item.state + '</td>' +
+                          	    '<td>' + item.pin + '</td>' +
+
+                          	    '<td>' +
+                          	      '<a href="tel:' + item.contactDetails + '" class="text-decoration-none">' +
+                          	        item.contactDetails +
+                          	      '</a>' +
+                          	    '</td>' +
+
+                          	    '<td>' + item.esicCode + '</td>' +
+                          	    '<td>' + item.gst + '</td>' +
+
+                          	    '<td>' +
+                          	      '<span class="badge" style="background: rgba(228, 82, 13, 0.1); color: #E4520D; font-weight: 600;">' +
+                          	        item.attendanceType +
+                          	      '</span>' +
+                          	    '</td>' +
+
+                          	    '<td>' +
+                          	      '<div class="dropdown">' +
+                          	        '<button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+                          	          '<i class="fa-solid fa-ellipsis-vertical"></i>' +
+                          	        '</button>' +
+
+                          	        '<ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">' +
+
+                          	          '<li>' +
+                          	            '<a class="dropdown-item py-2" href="#" onclick="editFactory(\'' + item.factoryId + '\')">' +
+                          	              '<i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Edit Factory' +
+                          	            '</a>' +
+                          	          '</li>' +
+
+                          	          '<li>' +
+                          	            '<a class="dropdown-item py-2" href="contractor.html?factory=' + item.id + '">' +
+                          	              '<i class="fa-solid fa-handshake me-2 text-success"></i> Check Contractors' +
+                          	            '</a>' +
+                          	          '</li>' +
+
+                          	          '<li>' +
+                          	            '<a class="dropdown-item py-2" href="employees.html?factory=' + item.id + '">' +
+                          	              '<i class="fa-solid fa-users me-2 text-info"></i> Check Employees' +
+                          	            '</a>' +
+                          	          '</li>' +
+
+                          	        '</ul>' +
+                          	      '</div>' +
+                          	    '</td>' +
+
+                          	  '</tr>';
+                	        listContainer.insertAdjacentHTML('beforeend', row);
+                	    });
+
+                	
+
+                
+          /*       renderFactories(filteredData); */
+
+            } else {
+                alert("No factory data found");
+            }
 
         } else {
             alert("Failed to load factories. Status: " + xhr.status);
