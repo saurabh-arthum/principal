@@ -1,10 +1,12 @@
 package com.arthum.admin.service.compliance.compliance;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class CenterComplianceService {
     public Map<String, String> getcodewagesFormIPdf() {
         Map<String, String> resMap=new HashMap<String, String>();

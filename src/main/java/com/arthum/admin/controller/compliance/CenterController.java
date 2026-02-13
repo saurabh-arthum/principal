@@ -60,7 +60,7 @@ public class CenterController {
         System.out.println("odewages/formx/pdf: " + payload);
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/codewages/formIX/pdf")
+    @GetMapping("/codewages/formIX/excel")
     public ResponseEntity<List<Map<String,String> >> codewagesFormIXexcel(Map<String, Object> payload) {
         List<Map<String,String>> response=centerService.codewagesForm4excel();
         System.out.println("odewages/formx/pdf: " + payload);
