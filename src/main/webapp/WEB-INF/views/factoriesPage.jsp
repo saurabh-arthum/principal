@@ -83,11 +83,9 @@
 						<div class="col-6 col-md-3 col-lg-2">
 							<label class="filter-label">Attendance Type</label> <select
 								class="form-select filter-input" id="filterStatus">
-								<option value="all">All Types</option>
-								<option value="Biometric">Biometric</option>
-								<option value="RFID Card">RFID Card</option>
-								<option value="Face Recognition">Face Recognition</option>
-								<option value="Manual">Manual</option>
+								<option value="ATTENDANCE">ATTENDANCE</option>
+								<option value="SHIFT">SHIFT</option>
+								<option value="TIMING">TIMING</option>
 							</select>
 						</div>
 						<div class="col-6 col-md-3 col-lg-2">
@@ -474,10 +472,9 @@
 									</span> <select class="form-select border-0 bg-light"
 										id="editAttendanceType">
 										<option value="">Select Attendance Type</option>
-										<option>Biometric</option>
-										<option>RFID Card</option>
-										<option>Face Recognition</option>
-										<option>Manual</option>
+										<option value="ATTENDANCE">ATTENDANCE</option>
+										<option value="SHIFT">SHIFT</option>
+										<option value="TIMING">TIMING</option>
 									</select>
 								</div>
 							</div>
@@ -504,16 +501,19 @@
 										class="fa-solid fa-map text-muted"></i>
 									</span> <select class="form-select border-0 bg-light" id="editState">
 										<option value="">Select State</option>
-										<option>Illinois</option>
-										<option>Massachusetts</option>
-										<option>Texas</option>
-										<option>California</option>
-										<option>Washington</option>
-										<option>Colorado</option>
-										<option>Arizona</option>
-										<option>Missouri</option>
-										<option>Pennsylvania</option>
-										<option>New York</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+										<option value="Assam">Assam</option>
+										<option value="Bihar">Bihar</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+										<option value="Andhra Pradesh">Andhra Pradesh</option>
+
+
 									</select>
 								</div>
 							</div>
@@ -628,7 +628,7 @@
     var formdata = new FormData();
     formdata.append("factoryId", id);
 
-    fetch("/api/factories/edit", {
+    fetch("/api/factories/getbyId", {
         method: "POST",
         body: formdata
     })
@@ -658,6 +658,8 @@
     	    e.preventDefault();
 
     	    const id = this.dataset.factoryId;
+    	    var formdata = new FormData();
+    	    formdata.append("factoryId", id);
 
     	    const updatedData = {
     	        factoryName: document.getElementById("editFactoryName").value,
@@ -671,11 +673,12 @@
     	        gst: document.getElementById("editGst").value
     	    };
 
-    	    fetch("/api/factories/update" + id, {
+    	    fetch("/api/factories/saveUpdate" + id, {
     	        method: "POST",
     	        headers: {
     	            "Content-Type": "application/json"
     	        },
+    	        body: formdata,
     	        body: JSON.stringify(updatedData)
     	    })
     	    .then(res => res.json())
