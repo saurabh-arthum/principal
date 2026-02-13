@@ -1171,7 +1171,7 @@ function searchFactoriesFromBackend(factoryName) {
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "/api/factories/byfactoryName", true);
+    xhr.open("POST", "/api/factories/byfactoryName", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = function () {
@@ -1181,9 +1181,7 @@ function searchFactoriesFromBackend(factoryName) {
             var response = JSON.parse(xhr.responseText);
 
             if (response.status === 200 && response.data) {
-
                 renderFactoryTable(response.data);
-
             } else {
                 alert("No factory found");
             }
@@ -1197,12 +1195,11 @@ function searchFactoriesFromBackend(factoryName) {
         alert("Network error during search.");
     };
 
-    var data = {
+    xhr.send(JSON.stringify({
         factoryName: factoryName
-    };
-
-    xhr.send(JSON.stringify(data));
+    }));
 }
+
 
 function renderFactoryTable(responseDetails) {
 

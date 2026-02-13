@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/factories")
@@ -89,17 +90,35 @@ public class FactoryController {
 	}
 	
 	//factories for searching by name
+	//@Operation(summary = "Get all factories by name(read-only datasource)")
+	/*
+	 * @GetMapping("/byfactoryName") public RestResponse
+	 * getFactoriesByName(@RequestParam (name = "factoryName") String factoryName) {
+	 * String principalId="b6f87ad5-db08-4337-9cb4-6b818f43ba45"; List<Factory>
+	 * fact= factoryService.getFactoryByName(factoryName, principalId); RestResponse
+	 * res = new RestResponse(); res.setStatus(200);
+	 * res.setMessage("Factory fetched successfully"); res.setData(fact); return
+	 * res; }
+	 */
+	
 	@Operation(summary = "Get all factories by name(read-only datasource)")
-	@GetMapping("/byfactoryName")
-	public RestResponse getFactoriesByName(@RequestBody Factory factory, @RequestParam ("factoryName") String factoryName) {
-		String principalId="b6f87ad5-db08-4337-9cb4-6b818f43ba45";
-		List<Factory> fact= factoryService.getFactoryByName(factoryName, principalId);
-		RestResponse res = new RestResponse();
+	@PostMapping("/byfactoryName")
+	public RestResponse getFactoriesByName(@RequestBody Map<String, String> request) {
+
+	    String factoryName = request.get("factoryName");
+
+	    String principalId = "b6f87ad5-db08-4337-9cb4-6b818f43ba45";
+
+	    List<Factory> fact = factoryService.getFactoryByName(factoryName, principalId);
+
+	    RestResponse res = new RestResponse();
 	    res.setStatus(200);
 	    res.setMessage("Factory fetched successfully");
 	    res.setData(fact);
+
 	    return res;
 	}
+
 	
 	//saveAndUpdate
 	@PostMapping(value = "/saveUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -117,6 +136,7 @@ public class FactoryController {
 	    return res;
 	}
 	
+	//getbyid by sneha
 	@PostMapping(value="/getbyId", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
 	public RestResponse getFactoriesById(@ModelAttribute Factory factory) {
