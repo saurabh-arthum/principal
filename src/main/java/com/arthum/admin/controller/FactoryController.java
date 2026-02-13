@@ -61,7 +61,6 @@ public class FactoryController {
 	    res.setStatus(201);
 	    res.setMessage("Factory added successfully");
 	    res.setData(fact);
-
 	    return res;
 	}
 
@@ -71,6 +70,7 @@ public class FactoryController {
 	public Factory updateFactory(@PathVariable String id, @RequestBody Factory factory) {
 		log.info("REST: Update factory request - ID: {}", id);
 		return factoryService.updateFactory(id, factory);
+		
 	}
 
 	@Operation(summary = "Update factory status")
@@ -85,5 +85,34 @@ public class FactoryController {
 	public ResponseEntity<Integer> deleteInactiveFactory(@PathVariable String id) {
 		int deleted = factoryService.deleteInactiveFactory(id);
 		return ResponseEntity.ok(deleted);
+	}
+	
+	//factories for searching by name
+	@Operation(summary = "Get all factories by name(read-only datasource)")
+	@GetMapping("/byfactoryName")
+	public RestResponse getFactoriesByName(@RequestBody Factory factory, @RequestParam ("factoryName") String factoryName) {
+		String principalId="b6f87ad5-db08-4337-9cb4-6b818f43ba45";
+		List<Factory> fact= factoryService.getFactoryByName(factoryName, principalId);
+		RestResponse res = new RestResponse();
+	    res.setStatus(200);
+	    res.setMessage("Factory fetched successfully");
+	    res.setData(fact);
+	    return res;
+	}
+	
+	//saveAndUpdate
+	@PostMapping(value = "/saveUpdate")
+	public RestResponse saveFactory(@RequestBody Factory factory) {
+	    RestResponse res = new RestResponse();
+	    try {
+	        Factory saved = factoryService.addOrUpdateFactory(factory);
+	        res.setStatus(201);
+	        res.setMessage("Factory saved successfully");
+	        res.setData(saved);
+	    } catch (RuntimeException e) {
+	        res.setStatus(400);
+	        res.setMessage("Can't save factory: " + e.getMessage());
+	    }
+	    return res;
 	}
 }

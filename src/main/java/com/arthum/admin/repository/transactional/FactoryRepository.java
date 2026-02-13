@@ -1,6 +1,9 @@
 package com.arthum.admin.repository.transactional;
 
 import com.arthum.admin.entity.Factory;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,4 +30,6 @@ public interface FactoryRepository extends JpaRepository<Factory, String> {
                                    @Param("factoryName") String factoryName,
                                    @Param("address") String address,
                                    Pageable pageable);
+
+List<Factory> findByFactoryNameContainingAndPrincipalId(String factoryName, String principalId);
 }

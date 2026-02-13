@@ -14,25 +14,6 @@
         <div class="menu-title">Main Menu</div>
 
         <ul class="nav flex-column">
-            <!-- Dashboard -->
-            <!-- <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="collapse" href="#dashboardSubmenu" role="button"
-                aria-expanded="true" aria-controls="dashboardSubmenu" title="Dashboard">
-                <span class="brand-icon"><i class="fa-solid fa-table-cells-large"></i></span>
-                <span>Dashboard</span>
-                <span class="menu-arrow"><i class="fa-solid fa-chevron-right" style="font-size: 10px"></i></span>
-              </a>
-              <div class="collapse show" id="dashboardSubmenu">
-                <ul class="submenu">
-                  <li>
-                    <a href="index.html" class="nav-link active">Admin Dashboard</a>
-                  </li>
-                  <li><a href="#" class="nav-link">Employee Dashboard</a></li>
-                  <li><a href="#" class="nav-link">Manager Dashboard</a></li>
-                  <li><a href="#" class="nav-link">Factory Dashboard</a></li>
-                </ul>
-              </div>
-            </li> -->
 
             <!-- Dashboard -->
             <li class="nav-item">
