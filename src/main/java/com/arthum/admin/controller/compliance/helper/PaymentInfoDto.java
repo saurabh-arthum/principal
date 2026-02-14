@@ -2,7 +2,7 @@ package com.arthum.admin.controller.compliance.helper;
 
 import java.time.LocalDate;
 
-public class PaymentInfo {
+public class PaymentInfoDto {
     private String wageFrequency;
     private LocalDate wagePeriodFrom;
     private LocalDate wagePeriodTo;

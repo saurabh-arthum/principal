@@ -2,7 +2,7 @@ package com.arthum.admin.controller.compliance.helper;
 
 import java.math.BigDecimal;
 
-public class Deductions {
+public class DeductionsDto {
     private BigDecimal epf;
     private BigDecimal esic;
     private BigDecimal society;

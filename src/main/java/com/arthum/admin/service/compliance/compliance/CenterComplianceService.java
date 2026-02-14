@@ -1,6 +1,6 @@
 package com.arthum.admin.service.compliance.compliance;
 
-import com.arthum.admin.controller.compliance.helper.InputObject;
+import com.arthum.admin.controller.compliance.helper.ComplianceInputObject;
 import com.arthum.admin.controller.compliance.helper.WageRate;
 import com.arthum.admin.controller.compliance.helper.WageRecord;
 import com.arthum.admin.entity.CompanyMaster;
@@ -29,7 +29,7 @@ public class CenterComplianceService {
     @Autowired
     SalaryDataReadRepository salaryDataReadRepositor;
 
-    public Map<String, Object> getcodewagesFormIPdf(InputObject inputObject) {
+    public Map<String, Object> getcodewagesFormIPdf(ComplianceInputObject inputObject) {
 
         Map<String, Object> resMap=new HashMap<String, Object>();
         CompanyMaster companyMaster =companyMasterReadRepository.findByCompanyId(inputObject.getCompanyId());
@@ -40,7 +40,7 @@ public class CenterComplianceService {
         resMap.put("employee", emp);
         return resMap;
     }
-    public Map<String, Object> codewagesFormIexcel(InputObject inputObject) {
+    public Map<String, Object> codewagesFormIexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         CompanyMaster companyMaster =companyMasterReadRepository.findByCompanyId(inputObject.getCompanyId());
         List<EmployeeMaster> empList= employeeMasterReadRepository.findByCompanyIdAndFactoryId(inputObject.getCompanyId(),inputObject.getFactoryId());
@@ -55,7 +55,7 @@ public class CenterComplianceService {
        //not required
         return resMap;
     }
-    public Map<String, Object> codewagesForm4excel(InputObject inputObject) {
+    public Map<String, Object> codewagesForm4excel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         CompanyMaster companyMaster =companyMasterReadRepository.findByCompanyId(inputObject.getCompanyId());
         List<EmployeeMaster> empList= employeeMasterReadRepository.findByCompanyIdAndFactoryId(inputObject.getCompanyId(),inputObject.getFactoryId());
@@ -86,87 +86,87 @@ public class CenterComplianceService {
         return resMap;
     }
 
-    public Map<String, Object> codewagesFormVpdf(InputObject inputObject) {
+    public Map<String, Object> codewagesFormVpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> codewagesFormVIIpdf(InputObject inputObject) {
+    public Map<String, Object> codewagesFormVIIpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> codewagesFormIXpdf(InputObject inputObject) {
+    public Map<String, Object> codewagesFormIXpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> rulessocialsocietyFormIIIpdf(InputObject inputObject) {
+    public Map<String, Object> rulessocialsocietyFormIIIpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormIIIpdf(InputObject inputObject) {
+    public Map<String, Object> oshwFormIIIpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormIVpdf(InputObject inputObject) {
+    public Map<String, Object> oshwFormIVpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVpdf(InputObject inputObject) {
+    public Map<String, Object> oshwFormVpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVIpdf(InputObject inputObject) {
+    public Map<String, Object> oshwFormVIpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVIIpdf(InputObject inputObject) {
+    public Map<String, Object> oshwFormVIIpdf(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVIIIAexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormVIIIAexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVIIIBexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormVIIIBexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVIIICexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormVIIICexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormVIIIexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormVIIIexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormXexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormXexcel(ComplianceInputObject inputObject) {
 
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
-    public Map<String, Object> oshwFormXIexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormXIexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> oshwFormXIVexcel(InputObject inputObject) {
+    public Map<String, Object> oshwFormXIVexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }
 
-    public Map<String, Object> codewagesFormIXexcel(InputObject inputObject) {
+    public Map<String, Object> codewagesFormIXexcel(ComplianceInputObject inputObject) {
         Map<String, Object> resMap=new HashMap<String, Object>();
         return resMap;
     }

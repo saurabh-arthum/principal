@@ -2,7 +2,7 @@ package com.arthum.admin.controller.compliance.helper;
 
 import java.math.BigDecimal;
 
-public class WageRecord {
+public class WageRecordDto {
 
     private Integer serialNo;
     private String employeeCode;
@@ -10,10 +10,10 @@ public class WageRecord {
     private String designation;
     private String department;
 
-    private PaymentInfo paymentInfo;
-    private WageRate rateOfWages;
-    private Earnings earnings;
-    private Deductions deductions;
+    private PaymentInfoDto paymentInfo;
+    private WageRateDto rateOfWages;
+    private EarningsDto earnings;
+    private DeductionsDto deductions;
     private BigDecimal netPayment;
     private PaymentDetails paymentDetails;
     private Compliance compliance;
@@ -79,35 +79,35 @@ public class WageRecord {
         this.department = department;
     }
 
-    public PaymentInfo getPaymentInfo() {
+    public PaymentInfoDto getPaymentInfo() {
         return paymentInfo;
     }
 
-    public void setPaymentInfo(PaymentInfo paymentInfo) {
+    public void setPaymentInfo(PaymentInfoDto paymentInfo) {
         this.paymentInfo = paymentInfo;
     }
 
-    public WageRate getRateOfWages() {
+    public WageRateDto getRateOfWages() {
         return rateOfWages;
     }
 
-    public void setRateOfWages(WageRate rateOfWages) {
+    public void setRateOfWages(WageRateDto rateOfWages) {
         this.rateOfWages = rateOfWages;
     }
 
-    public Earnings getEarnings() {
+    public EarningsDto getEarnings() {
         return earnings;
     }
 
-    public void setEarnings(Earnings earnings) {
+    public void setEarnings(EarningsDto earnings) {
         this.earnings = earnings;
     }
 
-    public Deductions getDeductions() {
+    public DeductionsDto getDeductions() {
         return deductions;
     }
 
-    public void setDeductions(Deductions deductions) {
+    public void setDeductions(DeductionsDto deductions) {
         this.deductions = deductions;
     }
 

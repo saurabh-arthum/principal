@@ -2,12 +2,10 @@ package com.arthum.admin.controller.compliance.helper;
 
 import java.math.BigDecimal;
 
-public class Earnings {
+public class WageRateDto {
     private BigDecimal basic;
     private BigDecimal da;
     private BigDecimal allowances;
-    private BigDecimal overtime;
-    private BigDecimal totalEarned;
 
     public BigDecimal getBasic() {
         return basic;
@@ -31,21 +29,5 @@ public class Earnings {
 
     public void setAllowances(BigDecimal allowances) {
         this.allowances = allowances;
-    }
-
-    public BigDecimal getOvertime() {
-        return overtime;
-    }
-
-    public void setOvertime(BigDecimal overtime) {
-        this.overtime = overtime;
-    }
-
-    public BigDecimal getTotalEarned() {
-        return totalEarned;
-    }
-
-    public void setTotalEarned(BigDecimal totalEarned) {
-        this.totalEarned = totalEarned;
     }
 }
