@@ -12,7 +12,11 @@ public class ContractorListDTO {
     private String status;
     private String contractorId;
 
-    public ContractorListDTO(String image, String name, String email,
+    public ContractorListDTO() {
+		super();
+	}
+
+	public ContractorListDTO(String image, String name, String email,
                              String type, String factoryName,
                              int noOfFactoryAssociated,
                              String gst, String status,

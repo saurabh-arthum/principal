@@ -57,7 +57,6 @@ public class ContractorDto {
 
         // Contractor Details
 
-        private String gstNumber;
         private String companyPanNumber;
 
         private LocalDate registrationDate;
@@ -117,7 +116,7 @@ List<TrainingDto> trainings;
                 ", businessMobile='" + businessMobile + '\'' +
                 ", businessEmail='" + businessEmail + '\'' +
                 ", businessTelephone='" + businessTelephone + '\'' +
-                ", gstNumber='" + gstNumber + '\'' +
+             
                 ", companyPanNumber='" + companyPanNumber + '\'' +
                 ", registrationDate=" + registrationDate +
                 ", contractStartDate=" + contractStartDate +
@@ -451,13 +450,6 @@ List<TrainingDto> trainings;
         this.businessTelephone = businessTelephone;
     }
 
-    public String getGstNumber() {
-        return gstNumber;
-    }
-
-    public void setGstNumber(String gstNumber) {
-        this.gstNumber = gstNumber;
-    }
 
     public String getCompanyPanNumber() {
         return companyPanNumber;

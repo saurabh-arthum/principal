@@ -17,7 +17,7 @@
 
             <!-- Dashboard -->
             <li class="nav-item">
-                <a href="/web/factories/dashboard" class="nav-link active" title="Dashboard">
+                <a href="/web/factories/masterdashboard" class="nav-link active" title="Dashboard">
                     <span class="brand-icon"><i class="fa-solid fa-table-cells-large"></i></span>
                     <span>Dashboard</span>
                 </a>

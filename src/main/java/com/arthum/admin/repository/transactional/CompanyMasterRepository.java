@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompanyMasterRepository extends JpaRepository<CompanyMaster , String> {
+
+	CompanyMaster findByGst(String gst);
+
+	CompanyMaster findByEntityId(Integer entityId);
 }

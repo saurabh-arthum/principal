@@ -5,4 +5,6 @@ import com.arthum.admin.entity.EntityMaster;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EntityMasterReadRepository extends JpaRepository<EntityMaster, String> {
+
+	EntityMaster findByGst(String gst);
 }

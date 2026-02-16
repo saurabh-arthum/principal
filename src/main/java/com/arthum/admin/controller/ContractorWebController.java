@@ -15,4 +15,5 @@ public class ContractorWebController {
         model.addAttribute("includeJsp","addcontractormaster.jsp");
         return "master";
     }
+    
 }
