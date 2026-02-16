@@ -74,7 +74,8 @@ public class Factory {
 
 	@Column(name = "INVOICE_TYPE_ID")
 	private Integer invoiceTypeId;
-
+    @Column(name = "FACTORY_MASTER_ID")
+    private Integer factoryMasterId;
 	@Override
 	public String toString() {
 		return "Factory{" + "factoryId='" + factoryId + '\'' + ", principalId='" + principalId + '\'' + ", companyId='"
@@ -246,4 +247,12 @@ public class Factory {
 	public void setInvoiceTypeId(Integer invoiceTypeId) {
 		this.invoiceTypeId = invoiceTypeId;
 	}
+
+    public Integer getFactoryMasterId() {
+        return factoryMasterId;
+    }
+
+    public void setFactoryMasterId(Integer factoryMasterId) {
+        this.factoryMasterId = factoryMasterId;
+    }
 }

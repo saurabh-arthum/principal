@@ -30,4 +30,8 @@ public interface FactoryRepository extends JpaRepository<Factory, String> {
 			@Param("address") String address, Pageable pageable);
 
 	List<Factory> findByFactoryNameContainingAndPrincipalId(String factoryName, String principalId);
+
+    Factory fidnByFactoryMasterId(String factoryId);
+
+    Factory fidnByFactoryMasterIdAndCompanyId(String factoryId, String companyId);
 }

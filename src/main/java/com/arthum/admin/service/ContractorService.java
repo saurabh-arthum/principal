@@ -4,16 +4,14 @@ import com.arthum.admin.controller.helper.ContractorDashboardSummary;
 import com.arthum.admin.controller.helper.ContractorDto;
 import com.arthum.admin.controller.helper.ContractorListDTO;
 import com.arthum.admin.controller.helper.InputObject;
-import com.arthum.admin.entity.ApplyDetails;
-import com.arthum.admin.entity.CompanyMaster;
-import com.arthum.admin.entity.EntityMaster;
-import com.arthum.admin.entity.FactoryMaster;
+import com.arthum.admin.entity.*;
 import com.arthum.admin.repository.readonly.ApplyDetailsReadRepository;
 import com.arthum.admin.repository.readonly.CompanyMasterReadRepository;
 import com.arthum.admin.repository.readonly.EntityMasterReadRepository;
 import com.arthum.admin.repository.transactional.CompanyMasterRepository;
 
 import com.arthum.admin.repository.transactional.FactoryMasterRepository;
+import com.arthum.admin.repository.transactional.FactoryRepository;
 import com.arthum.admin.utility.UniqueId;
 import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +41,8 @@ public class ContractorService {
     ApplyDetailsReadRepository applyDetailsReadRepository;
     @Autowired
     FactoryMasterRepository factoryMasterRepository;
-
+    @Autowired
+    FactoryRepository factoryRepository;
 
 static List<ContractorListDTO>list=new ArrayList<ContractorListDTO>();
     public ContractorDashboardSummary getSummary(String principalId) {
@@ -101,12 +100,13 @@ static List<ContractorListDTO>list=new ArrayList<ContractorListDTO>();
 */
         	company=companyMasterRepository.save(company);
         }
-        FactoryMaster factoryMaster = factoryMasterRepository.findByFactoryMasterId(payload.getFactoryId());
-
+       // FactoryMaster factoryMaster = factoryMasterRepository.findByFactoryMasterId(payload.getFactoryId());
+        Factory factory=factoryRepository.fidnByFactoryMasterIdAndCompanyId(payload.getFactoryId(),company.getCompanyId());
+        if(factory==null) {//create new afctory and }
 
 //if not exist Store in  cmpmanyMasterr
-		//entry in factory and status is approved.
-		
+            //entry in factory and status is approved.
+        }
 		return null;
 	}
 }
