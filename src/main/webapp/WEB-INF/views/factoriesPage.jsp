@@ -741,12 +741,12 @@ document.getElementById("editFactoryForm").addEventListener("submit", function(e
         const locationFilter = document.getElementById('filterLocation').value;
         
 
-        if (searchTerm.length < 2) {
+        if (searchTerm.length < 2 || statusFilter.length < 2 ||locationFilter.length < 2 ) {
             loadFactoriesFromBackend(); 
             return;
         }
 
-        searchFactoriesFromBackend(searchTerm);
+        searchFactoriesFromBackend(searchTerm,statusFilter,locationFilter);
     }
 
        // currentPage = 1;
@@ -1167,11 +1167,11 @@ function loadFactoriesFromBackend() {
 }
 
 
-function searchFactoriesFromBackend(factoryName) {
+function searchFactoriesFromBackend(factoryName,attandencestatus,state) {
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "/api/factories/byfactoryName", true);
+    xhr.open("POST", "/api/factories/search", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = function () {
@@ -1196,7 +1196,9 @@ function searchFactoriesFromBackend(factoryName) {
     };
 
     xhr.send(JSON.stringify({
-        factoryName: factoryName
+        factoryName: factoryName,
+        attendanceType: attandencestatus,
+        state: locationFilter
     }));
 }
 
