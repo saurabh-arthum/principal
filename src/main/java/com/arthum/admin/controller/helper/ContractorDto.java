@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ContractorDto {
+    private String contractorId;
+    private String factoryId;
     private String image;
     private String name;
     private String email;
@@ -14,7 +16,7 @@ public class ContractorDto {
     private int noOfFactoryAssociated;
     private String gst;
     private String status;
-    private String contractorId;
+
     private String  panNumber;
     private String  aadharNumber;
     private String  registeredAddress;
@@ -561,5 +563,13 @@ List<TrainingDto> trainings;
 
     public void setContract(ContractDTO contract) {
         Contract = contract;
+    }
+
+    public String getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(String factoryId) {
+        this.factoryId = factoryId;
     }
 }

@@ -1,7 +1,5 @@
 package com.arthum.admin.controller.helper;
-
 import java.time.LocalDate;
-
 public class AttendanceDto {
     LocalDate date;
     Integer totalWorkforce;

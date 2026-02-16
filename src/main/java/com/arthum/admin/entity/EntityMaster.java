@@ -81,6 +81,14 @@ public class EntityMaster {
     @Column(name = "APPLY_ID")
     private Integer applyId;
 
+    public EntityMaster(String gst, String panNumber, String entityName, String entityType) {
+        this.gst=gst;
+                this.pan= panNumber;
+        this.entityName=entityName;
+        this.entityType=entityType;
+    }
+    public EntityMaster() {
+    }
     @Override
     public String toString() {
         return "EntityMaster{" +

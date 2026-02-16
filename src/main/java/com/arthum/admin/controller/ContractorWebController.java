@@ -15,5 +15,8 @@ public class ContractorWebController {
         model.addAttribute("includeJsp","addcontractormaster.jsp");
         return "master";
     }
-    
+    @GetMapping("/contractorPage")
+    public String contractor(Model model) {
+        return "contractor";
+    }
 }
