@@ -1,8 +1,8 @@
 package com.arthum.admin.service.compliance.compliance;
 
 import com.arthum.admin.controller.compliance.helper.ComplianceInputObject;
-import com.arthum.admin.controller.compliance.helper.WageRate;
-import com.arthum.admin.controller.compliance.helper.WageRecord;
+import com.arthum.admin.controller.compliance.helper.WageRateDto;
+import com.arthum.admin.controller.compliance.helper.WageRecordDto;
 import com.arthum.admin.entity.CompanyMaster;
 import com.arthum.admin.entity.EmployeeMaster;
 import com.arthum.admin.entity.Factory;
@@ -56,21 +56,21 @@ public class CenterComplianceService {
         return resMap;
     }
     public Map<String, Object> codewagesForm4excel(ComplianceInputObject inputObject) {
-        Map<String, Object> resMap=new HashMap<String, Object>();
-        CompanyMaster companyMaster =companyMasterReadRepository.findByCompanyId(inputObject.getCompanyId());
+      Map<String, Object> resMap=new HashMap<String, Object>();
+       /*   CompanyMaster companyMaster =companyMasterReadRepository.findByCompanyId(inputObject.getCompanyId());
         List<EmployeeMaster> empList= employeeMasterReadRepository.findByCompanyIdAndFactoryId(inputObject.getCompanyId(),inputObject.getFactoryId());
         Factory factory=factoryReadRepository.findByFactoryId(inputObject.getFactoryId());
-        List<SalaryData> salrayDataList=salaryDataReadRepositor.findByCompanyIdAndFactoryIdAndMonth(inputObject.getCompanyId(),inputObject.getFactoryId(),inputObject.getMonth());
-        List<WageRecord>  wageRecordList=new ArrayList<>();
+        List<SalaryData> salrayDataList=null;//salaryDataReadRepositor.findByCompanyIdAndFactoryIdAndMonth(inputObject.getCompanyId(),inputObject.getFactoryId(),inputObject.getMonth());
+        List<WageRecordDto>  wageRecordList=new ArrayList<>();
         for(EmployeeMaster e:empList){
             for(SalaryData s:salrayDataList){
                 if(e.getEmployeeId().equals(s.getEmployeeId())){
-                    WageRecord w=new WageRecord();
+                    WageRecordDto w=new WageRecordDto();
                     w.setEmployeeCode(e.getEmployeeId());
                     w.setName(e.getName());
                     w.setDesignation(e.getEmployeeSubtype());
                     w.setDepartment(e.getEmployeeType());
-                    WageRate wRate=new WageRate();
+                    WageRateDto wRate=new WageRateDto();
                   //  {"HRA":1000,"PERFORMANCE ALLOW":1000,"BASIC":10000,"ATTENDANCE ALLOW":1000}
                   //  wRate.setAllowances();
                //     wRate.setBasic();
@@ -83,7 +83,7 @@ public class CenterComplianceService {
         resMap.put("company",companyMaster);
         resMap.put("factory", factory);
         resMap.put("wageRecord", wageRecordList);
-        return resMap;
+        */return resMap;
     }
 
     public Map<String, Object> codewagesFormVpdf(ComplianceInputObject inputObject) {
