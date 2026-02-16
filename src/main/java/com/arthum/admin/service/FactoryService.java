@@ -1,5 +1,6 @@
 package com.arthum.admin.service;
 
+import com.arthum.admin.dto.FactorySearchRequest;
 import com.arthum.admin.entity.Factory;
 import com.arthum.admin.exception.ResourceNotFoundException;
 import com.arthum.admin.repository.readonly.FactoryReadRepository;
@@ -8,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -164,4 +167,19 @@ public class FactoryService {
 		return factoryRepository.findById(factoryId).orElseThrow(() -> new RuntimeException("Factory not found with factoryId : " + factoryId));
 	}
 
+	
+	public List<Factory> searchFactories(FactorySearchRequest request) {
+	    Factory probe = new Factory();
+	    probe.setPrincipalId("b6f87ad5-db08-4337-9cb4-6b818f43ba45"); 
+	    probe.setFactoryName(request.getFactoryName());
+	    probe.setState(request.getState());
+	    probe.setAttendanceType(request.getAttendanceType());
+	    probe.setDistrict(request.getDistrict());
+	    probe.setStatus(request.getStatus());
+	    ExampleMatcher matcher = ExampleMatcher.matching()
+	            .withIgnoreNullValues()
+	            .withMatcher("factoryName",
+	                    ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+	    return factoryRepository.findAll(Example.of(probe, matcher));
+	}
 }

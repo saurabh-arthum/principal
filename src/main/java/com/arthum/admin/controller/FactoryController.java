@@ -1,5 +1,6 @@
 package com.arthum.admin.controller;
 
+import com.arthum.admin.dto.FactorySearchRequest;
 import com.arthum.admin.entity.Factory;
 import com.arthum.admin.helper.RestResponse;
 import com.arthum.admin.service.FactoryService;
@@ -89,35 +90,35 @@ public class FactoryController {
 		return ResponseEntity.ok(deleted);
 	}
 	
-	//factories for searching by name
-	//@Operation(summary = "Get all factories by name(read-only datasource)")
-	/*
-	 * @GetMapping("/byfactoryName") public RestResponse
-	 * getFactoriesByName(@RequestParam (name = "factoryName") String factoryName) {
-	 * String principalId="b6f87ad5-db08-4337-9cb4-6b818f43ba45"; List<Factory>
-	 * fact= factoryService.getFactoryByName(factoryName, principalId); RestResponse
-	 * res = new RestResponse(); res.setStatus(200);
-	 * res.setMessage("Factory fetched successfully"); res.setData(fact); return
-	 * res; }
-	 */
 	
-	@Operation(summary = "Get all factories by name(read-only datasource)")
-	@PostMapping("/byfactoryName")
-	public RestResponse getFactoriesByName(@RequestBody Map<String, String> request) {
-
-	    String factoryName = request.get("factoryName");
-
-	    String principalId = "b6f87ad5-db08-4337-9cb4-6b818f43ba45";
-
-	    List<Factory> fact = factoryService.getFactoryByName(factoryName, principalId);
-
-	    RestResponse res = new RestResponse();
-	    res.setStatus(200);
-	    res.setMessage("Factory fetched successfully");
-	    res.setData(fact);
-
-	    return res;
-	}
+//	//factories for searching by attendanceType
+//	@Operation(summary = "Get all factories by attendanceType(read-only datasource)")
+//	@PostMapping("/byattendanceType")
+//	public RestResponse getFactoriesByAttendanceType(@RequestBody Map<String, String> request) {
+//	    String attendanceType = request.get("attendanceType");
+//	    String principalId = "b6f87ad5-db08-4337-9cb4-6b818f43ba45";
+//	    List<Factory> fact = factoryService.getFactoryByAttendanceType(attendanceType, principalId);
+//	    RestResponse res = new RestResponse();
+//	    res.setStatus(200);
+//	    res.setMessage("Factory fetched successfully");
+//	    res.setData(fact);
+//
+//	    return res;
+//	}
+	
+	//factories for searching by name
+		@Operation(summary = "Get all factories by name(read-only datasource)")
+		@PostMapping("/byfactoryName")
+		public RestResponse getFactoriesByName(@RequestBody Map<String, String> request) {
+		    String factoryName = request.get("factoryName");
+		    String principalId = "b6f87ad5-db08-4337-9cb4-6b818f43ba45";
+		    List<Factory> fact = factoryService.getFactoryByName(factoryName, principalId);
+		    RestResponse res = new RestResponse();
+		    res.setStatus(200);
+		    res.setMessage("Factory fetched successfully");
+		    res.setData(fact);
+		    return res;
+		}
 
 	
 	//saveAndUpdate
@@ -148,4 +149,15 @@ public class FactoryController {
 	    res.setData(list);
 	    return res;
 	}
+	
+	@PostMapping("/search")
+	public RestResponse search(@RequestBody FactorySearchRequest request) {
+	    List<Factory> list = factoryService.searchFactories(request);
+	    RestResponse res = new RestResponse();
+	    res.setStatus(200);
+	    res.setMessage("Factory fetched successfully");
+	    res.setData(list);
+	    return res;
+	}
+
 }
