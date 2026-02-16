@@ -2,8 +2,11 @@ package com.arthum.admin.controller;
 
 import com.arthum.admin.entity.Factory;
 import com.arthum.admin.service.FactoryService;
+import com.arthum.admin.utility.DropDownUtility;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class FactoryWebController {
 	private static final Logger log = LoggerFactory.getLogger(FactoryWebController.class);
 	private final FactoryService factoryService;
+	
+	@Autowired
+	private DropDownUtility dropDownUtility;
+		
 
 	public FactoryWebController(FactoryService factoryService) {
 		this.factoryService = factoryService;
@@ -85,6 +92,10 @@ public class FactoryWebController {
 
 	@GetMapping("/factoriesPage")
 	public String factoriesPage(Model model) {
+		
+		model.addAttribute("stateList", dropDownUtility.getStateNamesList());
+		System.out.println(dropDownUtility.getStateNamesList());
+
 		return "factoriesPage";
 	}
 

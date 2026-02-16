@@ -169,17 +169,35 @@ public class FactoryService {
 
 	
 	public List<Factory> searchFactories(FactorySearchRequest request) {
+
 	    Factory probe = new Factory();
-	    probe.setPrincipalId("b6f87ad5-db08-4337-9cb4-6b818f43ba45"); 
-	    probe.setFactoryName(request.getFactoryName());
-	    probe.setState(request.getState());
-	    probe.setAttendanceType(request.getAttendanceType());
-	    probe.setDistrict(request.getDistrict());
-	    probe.setStatus(request.getStatus());
+	    probe.setPrincipalId("b6f87ad5-db08-4337-9cb4-6b818f43ba45");
+
+	    if (request.getFactoryName() != null && !request.getFactoryName().isBlank()) {
+	        probe.setFactoryName(request.getFactoryName());
+	    }
+
+	    if (request.getState() != null && !request.getState().isBlank()) {
+	        probe.setState(request.getState());
+	    }
+
+	    if (request.getAttendanceType() != null && !request.getAttendanceType().isBlank()) {
+	        probe.setAttendanceType(request.getAttendanceType());
+	    }
+
+	    if (request.getDistrict() != null && !request.getDistrict().isBlank()) {
+	        probe.setDistrict(request.getDistrict());
+	    }
+
+	    if (request.getStatus() != null && !request.getStatus().isBlank()) {
+	        probe.setStatus(request.getStatus());
+	    }
+
 	    ExampleMatcher matcher = ExampleMatcher.matching()
 	            .withIgnoreNullValues()
 	            .withMatcher("factoryName",
 	                    ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+
 	    return factoryRepository.findAll(Example.of(probe, matcher));
 	}
 }

@@ -1,3 +1,5 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 
@@ -83,6 +85,7 @@
 						<div class="col-6 col-md-3 col-lg-2">
 							<label class="filter-label">Attendance Type</label> <select
 								class="form-select filter-input" id="filterStatus">
+								<option value="">SELECT</option>
 								<option value="ATTENDANCE">ATTENDANCE</option>
 								<option value="SHIFT">SHIFT</option>
 								<option value="TIMING">TIMING</option>
@@ -90,18 +93,12 @@
 						</div>
 						<div class="col-6 col-md-3 col-lg-2">
 							<label class="filter-label">State</label> <select
-								class="form-select filter-input" id="filterLocation">
-								<option value="all">All States</option>
-								<option value="Illinois">Illinois</option>
-								<option value="Massachusetts">Massachusetts</option>
-								<option value="Texas">Texas</option>
-								<option value="California">California</option>
-								<option value="Washington">Washington</option>
-								<option value="Colorado">Colorado</option>
-								<option value="Arizona">Arizona</option>
-								<option value="Missouri">Missouri</option>
-								<option value="Pennsylvania">Pennsylvania</option>
-								<option value="New York">New York</option>
+								class="form-select filter-input" id="filterLocation" >
+								<c:forEach items="${stateList}" var="state">
+											<option value="${state}"
+												${selectedState eq state ? 'selected' : ''}>
+												${state}</option>
+										</c:forEach>
 							</select>
 						</div>
 						<div class="col-12 col-lg-2 text-md-end ms-auto">
@@ -741,8 +738,8 @@ document.getElementById("editFactoryForm").addEventListener("submit", function(e
         const locationFilter = document.getElementById('filterLocation').value;
         
 
-        if (searchTerm.length < 2 || statusFilter.length < 2 ||locationFilter.length < 2 ) {
-            loadFactoriesFromBackend(); 
+        if (!searchTerm && !statusFilter && !locationFilter) {
+            loadFactoriesFromBackend();
             return;
         }
 
@@ -1198,7 +1195,7 @@ function searchFactoriesFromBackend(factoryName,attandencestatus,state) {
     xhr.send(JSON.stringify({
         factoryName: factoryName,
         attendanceType: attandencestatus,
-        state: locationFilter
+        state: state
     }));
 }
 
