@@ -30,7 +30,7 @@ public class ContractorController {
                 service.getContractors(payload)
         );
     }
-    @PostMapping("/list")
+    @PostMapping("/contractor")
     public ResponseEntity<List<ContractorListDTO>> contractor(
             @RequestBody InputObject payload) {
 
