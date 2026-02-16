@@ -50,7 +50,8 @@
 
             <!-- Contractors -->
             <li class="nav-item">
-                <a href="contractor.html" class="nav-link" title="Contractors">
+               <a href="/web/contractor/contractorPage" class="nav-link" title="Contractors">
+
                     <span class="brand-icon"><i class="fa-solid fa-handshake"></i></span>
                     <span>Contractors</span>
                 </a>
