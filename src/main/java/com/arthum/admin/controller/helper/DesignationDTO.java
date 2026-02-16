@@ -1,4 +1,4 @@
-package com.arthum.admin.controller.compliance.helper;
+package com.arthum.admin.controller.helper;
 
 public class DesignationDTO {
 

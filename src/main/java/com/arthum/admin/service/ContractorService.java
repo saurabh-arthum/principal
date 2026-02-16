@@ -28,7 +28,7 @@ public class ContractorService {
     public ContractorDashboardSummary getSummary(String principalId) {
         return new ContractorDashboardSummary(100, 200, 300,10);
     }
-    public List<ContractorListDTO> getContractors(String id, int page, int size) {
+    public List<ContractorListDTO> getContractors(InputObject payload) {
        /* Pageable pageable = PageRequest.of(page, size);
 
         return repo.findById(id, pageable);
