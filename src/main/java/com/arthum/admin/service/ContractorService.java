@@ -101,7 +101,7 @@ static List<ContractorListDTO>list=new ArrayList<ContractorListDTO>();
         	company=companyMasterRepository.save(company);
         }
        // FactoryMaster factoryMaster = factoryMasterRepository.findByFactoryMasterId(payload.getFactoryId());
-        Factory factory=factoryRepository.fidnByFactoryMasterIdAndCompanyId(payload.getFactoryId(),company.getCompanyId());
+        Factory factory=factoryRepository.findByFactoryMasterIdAndCompanyId(payload.getFactoryId(),company.getCompanyId());
         if(factory==null) {//create new afctory and }
 
 //if not exist Store in  cmpmanyMasterr

@@ -31,7 +31,7 @@ public interface FactoryRepository extends JpaRepository<Factory, String> {
 
 	List<Factory> findByFactoryNameContainingAndPrincipalId(String factoryName, String principalId);
 
-    Factory fidnByFactoryMasterId(String factoryId);
+    Factory findByFactoryMasterId(String factoryId);
 
-    Factory fidnByFactoryMasterIdAndCompanyId(String factoryId, String companyId);
+    Factory findByFactoryMasterIdAndCompanyId(String factoryId, String companyId);
 }
